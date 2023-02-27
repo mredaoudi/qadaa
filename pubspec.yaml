@@ -1,0 +1,43 @@
+name: qadaa
+description: An app to keep up with your missed prayers.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0-179.0.dev <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences: "2.0.17"
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  introduction_screen: ^3.1.6
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: "0.11.0"
+  provider: ^6.0.5
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.png"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/flutter.png
+    - assets/fullscreen.jpg
+    - assets/img1.jpg
+    - assets/img2.jpg
+    - assets/img3.jpg
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
