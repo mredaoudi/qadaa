@@ -23,20 +23,6 @@ class MainScreen extends StatelessWidget {
           title: const Text("Qadaa"),
           backgroundColor: const Color(0xFF6096B4),
         ),
-        // bottomNavigationBar: BottomAppBar(
-        //   shape: const AutomaticNotchedShape(
-        //       RoundedRectangleBorder(), StadiumBorder(side: BorderSide())),
-        //   child: Container(height: 50.0),
-        // ),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        // floatingActionButton: FloatingActionButton(
-        //   heroTag: 'calendar',
-        //   backgroundColor: const Color(0xFF6096B4),
-        //   onPressed: () {
-        //     Navigator.pushNamed(context, '/period');
-        //   },
-        //   child: const Icon(Icons.edit_calendar),
-        // ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
@@ -50,7 +36,6 @@ class MainScreen extends StatelessWidget {
               heroTag: 'calendar',
               backgroundColor: const Color(0xFF6096B4),
               onPressed: () {
-                print(prayerProvider.prayers);
                 Navigator.pushNamed(context, '/period');
               },
               child: const Icon(Icons.edit_calendar),

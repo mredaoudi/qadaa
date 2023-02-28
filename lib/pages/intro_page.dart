@@ -13,7 +13,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-    Navigator.pushNamed(context, '/');
+    print('Haydar');
   }
 
   Widget _buildFullscreenImage() {
@@ -47,25 +47,9 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       globalBackgroundColor: Colors.white,
       allowImplicitScrolling: true,
       autoScrollDuration: 3000,
-      globalHeader: Align(
-        alignment: Alignment.topRight,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 16, right: 16),
-            child: _buildImage('flutter.png', 100),
-          ),
-        ),
-      ),
-      globalFooter: SizedBox(
+      globalFooter: const SizedBox(
         width: double.infinity,
         height: 60,
-        child: ElevatedButton(
-          child: const Text(
-            'Let\'s go right away!',
-            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-          ),
-          onPressed: () => _onIntroEnd(context),
-        ),
       ),
       pages: [
         PageViewModel(
@@ -88,44 +72,6 @@ class OnBoardingPageState extends State<OnBoardingPage> {
               "Kids and teens can track their stocks 24/7 and place trades that you approve.",
           image: _buildImage('img3.jpg'),
           decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Full Screen Page",
-          body:
-              "Pages can be full screen as well.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id euismod lectus, non tempor felis. Nam rutrum rhoncus est ac venenatis.",
-          image: _buildFullscreenImage(),
-          decoration: pageDecoration.copyWith(
-            contentMargin: const EdgeInsets.symmetric(horizontal: 16),
-            fullScreen: true,
-            bodyFlex: 2,
-            imageFlex: 3,
-            safeArea: 100,
-          ),
-        ),
-        PageViewModel(
-          title: "Another title page",
-          body: "Another beautiful body text for this example onboarding",
-          image: _buildImage('img2.jpg'),
-          footer: ElevatedButton(
-            onPressed: () {
-              introKey.currentState?.animateScroll(0);
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.lightBlue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
-            child: const Text(
-              'FooButton',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          decoration: pageDecoration.copyWith(
-            bodyFlex: 6,
-            imageFlex: 6,
-            safeArea: 80,
-          ),
         ),
         PageViewModel(
           title: "Title of last page - reversed",
