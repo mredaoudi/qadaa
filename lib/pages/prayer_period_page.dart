@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import '../components/period_counter.dart';
 import '../providers/prayer_provider.dart';
 
-class PeriodScreen extends StatefulWidget {
-  const PeriodScreen({super.key});
+class PrayerPeriodScreen extends StatefulWidget {
+  const PrayerPeriodScreen({super.key});
 
   @override
-  State<PeriodScreen> createState() => _PeriodScreenState();
+  State<PrayerPeriodScreen> createState() => _PrayerPeriodScreenState();
 }
 
-class _PeriodScreenState extends State<PeriodScreen> {
+class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
   var periods = {
     'years': {"amount": 0, "increment": 365, "label": "Years (365 days)"},
     'months': {"amount": 0, "increment": 30, "label": "Months (30 days)"},
