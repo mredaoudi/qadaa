@@ -58,7 +58,7 @@ class _PeriodScreenState extends State<PeriodScreen> {
       backgroundColor: const Color.fromARGB(255, 255, 253, 250),
       appBar: AppBar(
         title: const Text("Add a period"),
-        backgroundColor: const Color(0xFF6096B4),
+        backgroundColor: const Color(0xFF4E6E81),
         centerTitle: true,
       ),
       body: Column(
@@ -80,7 +80,7 @@ class _PeriodScreenState extends State<PeriodScreen> {
                   ),
                 ),
                 value: entry.value,
-                activeColor: Colors.blue,
+                activeColor: const Color(0xFF4E6E81),
                 onChanged: (bool value) {
                   setState(() {
                     prays[entry.key] = value;

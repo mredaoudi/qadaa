@@ -32,7 +32,7 @@ class PeriodCounter extends StatelessWidget {
                   onPressed: () => operation(period, -1),
                   icon: const Icon(Icons.remove),
                   iconSize: 32.0,
-                  color: const Color(0xFF6096B4),
+                  color: const Color(0xFF4E6E81),
                 ),
               ),
               Expanded(
@@ -51,7 +51,7 @@ class PeriodCounter extends StatelessWidget {
                   onPressed: () => operation(period, 1),
                   icon: const Icon(Icons.add),
                   iconSize: 32.0,
-                  color: const Color(0xFF6096B4),
+                  color: const Color(0xFF4E6E81),
                 ),
               ),
             ],

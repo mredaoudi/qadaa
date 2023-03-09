@@ -13,7 +13,7 @@ class NavDrawer extends StatelessWidget {
             height: 128,
             child: DrawerHeader(
               decoration: BoxDecoration(
-                color: Color(0xFF6096B4),
+                color: Color(0xFF4E6E81),
               ),
               child: Text(
                 'Menu',

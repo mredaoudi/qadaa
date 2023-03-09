@@ -14,7 +14,6 @@ class MainScreen extends StatelessWidget {
       title: "Qadaa",
       theme: ThemeData(
         primaryColor: const Color(0xFF4E6E81),
-        fontFamily: 'SecularOne',
       ),
       home: Scaffold(
         drawer: const NavDrawer(),
@@ -23,7 +22,6 @@ class MainScreen extends StatelessWidget {
           centerTitle: true,
           title: const Text(
             "Qadaa",
-            style: TextStyle(color: Color(0xFFF9DBBB)),
           ),
           backgroundColor: const Color(0xFF4E6E81),
         ),
@@ -38,7 +36,7 @@ class MainScreen extends StatelessWidget {
                 .toList(),
             FloatingActionButton(
               heroTag: 'calendar',
-              backgroundColor: const Color(0xFF6096B4),
+              backgroundColor: const Color(0xFF4E6E81),
               onPressed: () {
                 Navigator.pushNamed(context, '/period');
               },
