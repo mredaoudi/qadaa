@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../components/primary_color.dart';
 import '../components/prayer_counter.dart';
 import 'package:provider/provider.dart';
 import '../providers/prayer_provider.dart';
+import '../components/main_drawer.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -13,15 +13,19 @@ class MainScreen extends StatelessWidget {
     return MaterialApp(
       title: "Qadaa",
       theme: ThemeData(
-        primaryColor: const MyColor(),
-        fontFamily: 'Roboto',
+        primaryColor: const Color(0xFF4E6E81),
+        fontFamily: 'SecularOne',
       ),
       home: Scaffold(
+        drawer: const NavDrawer(),
         backgroundColor: const Color.fromARGB(255, 255, 253, 250),
         appBar: AppBar(
           centerTitle: true,
-          title: const Text("Qadaa"),
-          backgroundColor: const Color(0xFF6096B4),
+          title: const Text(
+            "Qadaa",
+            style: TextStyle(color: Color(0xFFF9DBBB)),
+          ),
+          backgroundColor: const Color(0xFF4E6E81),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

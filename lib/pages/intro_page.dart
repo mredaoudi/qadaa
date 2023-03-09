@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:qadaa/components/prayer_counter.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({Key? key}) : super(key: key);
@@ -74,31 +75,35 @@ class OnBoardingPageState extends State<OnBoardingPage> {
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Title of last page - reversed",
-          bodyWidget: Row(
+          titleWidget: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [_buildImage('icon/icon.png')],
+          ),
+          bodyWidget: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Text("Click on ", style: bodyStyle),
-              Icon(Icons.edit),
-              Text(" to edit a post", style: bodyStyle),
+              PrayerCounter(prayer: 'Prayer', amount: 4),
+              Text(
+                "Increment or decrease a prayer counter by clicking on the buttons.",
+                style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
             ],
           ),
           decoration: pageDecoration.copyWith(
-            bodyFlex: 2,
-            imageFlex: 4,
-            bodyAlignment: Alignment.bottomCenter,
-            imageAlignment: Alignment.topCenter,
-          ),
-          image: _buildImage('img1.jpg'),
+              bodyFlex: 4,
+              imageFlex: 2,
+              bodyAlignment: Alignment.center,
+              titlePadding: const EdgeInsets.fromLTRB(0, 10, 0, 50)),
           reverse: true,
         ),
       ],
       onDone: () => _onIntroEnd(context),
       //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
-      showSkipButton: false,
+      showSkipButton: true,
       skipOrBackFlex: 0,
       nextFlex: 0,
-      showBackButton: true,
+      showBackButton: false,
       //rtl: true, // Display as right-to-left
       back: const Icon(Icons.arrow_back),
       skip: const Text('Skip', style: TextStyle(fontWeight: FontWeight.w600)),

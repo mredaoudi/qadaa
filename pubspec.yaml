@@ -37,7 +37,11 @@ flutter:
     - assets/img1.jpg
     - assets/img2.jpg
     - assets/img3.jpg
+    - assets/icon/icon.png
   fonts:
     - family: Roboto
       fonts:
         - asset: fonts/Roboto-Regular.ttf
+    - family: SecularOne
+      fonts:
+        - asset: fonts/SecularOne-Regular.ttf
