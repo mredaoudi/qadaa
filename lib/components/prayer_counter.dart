@@ -29,11 +29,14 @@ class _PrayerCounterState extends State<PrayerCounter> {
     final prayerProvider = Provider.of<PrayerProvider>(context, listen: false);
     return Column(
       children: [
-        Text(widget.prayer,
-            style: const TextStyle(
-                fontSize: 20,
-                color: Color.fromARGB(180, 0, 0, 0),
-                fontWeight: FontWeight.bold)),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 15),
+          child: Text(widget.prayer,
+              style: const TextStyle(
+                  fontSize: 20,
+                  color: Color.fromARGB(255, 126, 126, 126),
+                  fontWeight: FontWeight.bold)),
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[

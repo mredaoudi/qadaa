@@ -40,7 +40,7 @@ class PeriodCounter extends StatelessWidget {
                 child: Text(
                   info['amount'].toString(),
                   style: const TextStyle(
-                      fontSize: 18.0,
+                      fontSize: 20.0,
                       color: Color.fromARGB(255, 126, 126, 126)),
                   textAlign: TextAlign.center,
                 ),

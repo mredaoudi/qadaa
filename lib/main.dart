@@ -24,7 +24,7 @@ void main() async {
       ],
       child: MaterialApp(
         title: 'Qadaa',
-        initialRoute: '/',
+        initialRoute: '/intro',
         routes: {
           '/': (context) => const MainScreen(),
           '/period/prayers': (context) => const PrayerPeriodScreen(),

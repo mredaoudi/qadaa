@@ -5,6 +5,8 @@ class NavDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final TextStyle textStyle = theme.textTheme.bodyMedium!;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -26,13 +28,8 @@ class NavDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.input),
-            title: const Text('Welcome'),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
-          ListTile(
-            leading: const Icon(Icons.person_2_outlined),
-            title: const Text('Profiles'),
+            leading: const Icon(Icons.rotate_left),
+            title: const Text('Reset Counters'),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
@@ -41,13 +38,56 @@ class NavDrawer extends StatelessWidget {
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: const Icon(Icons.border_color_outlined),
-            title: const Text('Testament'),
+            leading: const Icon(Icons.info_outline),
+            title: const Text('About'),
+            onTap: () => {
+              showAboutDialog(
+                context: context,
+                applicationName: 'Qadaa',
+                applicationIcon: Image.asset(
+                  'assets/icon/icon.png',
+                  width: 24,
+                  height: 24,
+                  fit: BoxFit.scaleDown,
+                  alignment: FractionalOffset.center,
+                ),
+                applicationVersion: '1.0.0',
+                applicationLegalese: 'GNU General Public License, version 3.0',
+                children: [
+                  const SizedBox(height: 24),
+                  RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                            style: textStyle,
+                            text:
+                                "Qadaa is an application made to help Muslims fulfill"
+                                'their duties that they missed, like prayers and fasts. '
+                                'Qadaa is part of the Ahlulbayt.app network.\n'),
+                        TextSpan(
+                            style: textStyle.copyWith(
+                                color: theme.colorScheme.primary),
+                            text: 'https://ahlulbayt.app'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.person_2_outlined),
+            title: const Text('People (coming soon)'),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: const Icon(Icons.exit_to_app),
-            title: const Text('Logout'),
+            leading: const Icon(Icons.border_color_outlined),
+            title: const Text('Testament (coming soon)'),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+          ListTile(
+            leading: const Icon(Icons.save_alt),
+            title: const Text('Save Online (coming soon)'),
             onTap: () => {Navigator.of(context).pop()},
           ),
         ],

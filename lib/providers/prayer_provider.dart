@@ -31,4 +31,12 @@ class PrayerProvider extends ChangeNotifier {
     box.put(prayer, value);
     notifyListeners();
   }
+
+  void reset() {
+    var box = Hive.box('prayers');
+    for (var pkey in _prayers.keys) {
+      _prayers[pkey] = 0;
+      box.put(pkey, 0);
+    }
+  }
 }

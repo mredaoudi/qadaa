@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../components/prayer_counter.dart';
 import '../components/fast_counter.dart';
-import 'package:provider/provider.dart';
+import '../components/main_drawer.dart';
 import '../providers/prayer_provider.dart';
 import '../providers/fast_provider.dart';
-import '../components/main_drawer.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -25,8 +26,23 @@ class MainScreen extends StatelessWidget {
           backgroundColor: const Color.fromARGB(255, 255, 253, 250),
           appBar: AppBar(
             centerTitle: true,
-            title: const Text(
-              "Qadaa",
+            title: RichText(
+              textAlign: TextAlign.center,
+              text: const TextSpan(
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: 'Qadaa\n',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  TextSpan(
+                    text: 'Mohammed',
+                    style: TextStyle(fontSize: 13, fontFamily: 'Courier'),
+                  ),
+                ],
+              ),
             ),
             backgroundColor: const Color(0xFF4E6E81),
             bottom: const TabBar(
@@ -53,9 +69,7 @@ class MainScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(context, '/period/prayers');
                     },
-                    child: const Icon(
-                      Icons.edit_calendar,
-                    ),
+                    child: const Icon(Icons.edit_calendar_outlined),
                   ),
                 ],
               ),

@@ -14,7 +14,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-    print('Haydar');
+    Navigator.pushNamed(context, '/');
   }
 
   Widget _buildFullscreenImage() {
@@ -40,63 +40,42 @@ class OnBoardingPageState extends State<OnBoardingPage> {
       bodyTextStyle: bodyStyle,
       bodyPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       pageColor: Colors.white,
-      imagePadding: EdgeInsets.zero,
+      imagePadding: EdgeInsets.only(top: 100),
     );
 
     return IntroductionScreen(
       key: introKey,
       globalBackgroundColor: Colors.white,
       allowImplicitScrolling: true,
-      autoScrollDuration: 3000,
       globalFooter: const SizedBox(
         width: double.infinity,
         height: 60,
       ),
       pages: [
         PageViewModel(
-          title: "Fractional shares",
+          title: "ٱلسَّلَامُ عَلَيْكُمْ\n As-salāmu ʿalaykum",
           body:
-              "Instead of having to buy an entire share, invest any amount you want.",
-          image: _buildImage('img1.jpg'),
+              "Welcome to the Qadaa app, an app to help you catch up to and keep with your religious duties.",
+          image: _buildImage('icon/icon.png'),
           decoration: pageDecoration,
         ),
-        PageViewModel(
-          title: "Learn as you go",
-          body:
-              "Download the Stockpile app and master the market with our mini-lesson.",
-          image: _buildImage('img2.jpg'),
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Kids and teens",
-          body:
-              "Kids and teens can track their stocks 24/7 and place trades that you approve.",
-          image: _buildImage('img3.jpg'),
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          titleWidget: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [_buildImage('icon/icon.png')],
-          ),
-          bodyWidget: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              PrayerCounter(prayer: 'Prayer', amount: 4),
-              Text(
-                "Increment or decrease a prayer counter by clicking on the buttons.",
-                style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-          decoration: pageDecoration.copyWith(
-              bodyFlex: 4,
-              imageFlex: 2,
-              bodyAlignment: Alignment.center,
-              titlePadding: const EdgeInsets.fromLTRB(0, 10, 0, 50)),
-          reverse: true,
-        ),
+        // PageViewModel(
+        //   title: "",
+        //   bodyWidget: const Column(
+        //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //     children: [
+        //       PrayerCounter(prayer: 'Prayer', amount: 4),
+        //       PrayerCounter(prayer: 'Prayer', amount: 4),
+        //       PrayerCounter(prayer: 'Prayer', amount: 4),
+        //       PrayerCounter(prayer: 'Prayer', amount: 4),
+        //       Text(
+        //         "Increment or decrease a prayer counter by clicking on the buttons.",
+        //         style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+        //         textAlign: TextAlign.center,
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ],
       onDone: () => _onIntroEnd(context),
       //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
