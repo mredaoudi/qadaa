@@ -10,7 +10,7 @@ class PeopleProvider extends ChangeNotifier {
 
   void setup() {
     var box = Hive.box('people');
-    _person = box.get('person') ?? 0;
+    _person = box.get('person') ?? '';
   }
 
   get person => _person;

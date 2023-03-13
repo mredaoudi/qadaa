@@ -28,11 +28,6 @@ class NavDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.rotate_left),
-            title: const Text('Reset Counters'),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
-          ListTile(
             leading: const Icon(Icons.settings_outlined),
             title: const Text('Settings'),
             onTap: () => {Navigator.of(context).pop()},

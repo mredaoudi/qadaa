@@ -5,7 +5,6 @@ import '../components/fast_counter.dart';
 import '../components/main_drawer.dart';
 import '../providers/prayer_provider.dart';
 import '../providers/fast_provider.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});

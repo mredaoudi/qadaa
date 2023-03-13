@@ -6,6 +6,7 @@ import 'pages/fast_period_page.dart';
 import 'pages/intro_page.dart';
 import 'providers/prayer_provider.dart';
 import 'providers/fast_provider.dart';
+import 'providers/people_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,6 +22,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider<PrayerProvider>(create: (_) => PrayerProvider()),
         ChangeNotifierProvider<FastProvider>(create: (_) => FastProvider()),
+        ChangeNotifierProvider<PeopleProvider>(create: (_) => PeopleProvider()),
       ],
       child: MaterialApp(
         title: 'Qadaa',
