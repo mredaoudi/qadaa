@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '../providers/fast_provider.dart';
+import '../providers/people_provider.dart';
 import '../components/period_counter.dart';
 
 class FastPeriodScreen extends StatefulWidget {
@@ -34,6 +35,7 @@ class _FastPeriodScreenState extends State<FastPeriodScreen> {
   @override
   Widget build(BuildContext context) {
     final fastProvider = Provider.of<FastProvider>(context);
+    final peopleProvider = Provider.of<PeopleProvider>(context);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 253, 250),
       appBar: AppBar(
@@ -95,7 +97,10 @@ class _FastPeriodScreenState extends State<FastPeriodScreen> {
             onPressed: _amount == 0
                 ? null
                 : () async {
-                    fastProvider.incrementOperation(_amount);
+                    fastProvider.incrementOperation(
+                      _amount,
+                      peopleProvider.currentUser,
+                    );
                     Navigator.pop(context);
                   },
             child: const Text(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/fast_provider.dart';
+import '../providers/people_provider.dart';
 import 'dart:async';
 
 class FastCounter extends StatefulWidget {
@@ -25,7 +26,9 @@ class _FastCounterState extends State<FastCounter> {
 
   @override
   Widget build(BuildContext context) {
+    final peopleProvider = Provider.of<PeopleProvider>(context);
     final fastProvider = Provider.of<FastProvider>(context, listen: false);
+    var user = peopleProvider.currentUser;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -57,7 +60,7 @@ class _FastCounterState extends State<FastCounter> {
                       if (!_longPressCanceled) {
                         _timer = Timer.periodic(
                             const Duration(milliseconds: 50), (timer) {
-                          fastProvider.incrementOperation(-1);
+                          fastProvider.incrementOperation(-1, user);
                         });
                       }
                     });
@@ -68,7 +71,7 @@ class _FastCounterState extends State<FastCounter> {
                   child: FloatingActionButton(
                     heroTag: 'fast' 'plus',
                     onPressed: () async {
-                      fastProvider.incrementOperation(-1);
+                      fastProvider.incrementOperation(-1, user);
                     },
                     backgroundColor: const Color(0xFF4DAB8F),
                     child: const Icon(
@@ -100,7 +103,7 @@ class _FastCounterState extends State<FastCounter> {
                       if (!_longPressCanceled) {
                         _timer = Timer.periodic(
                             const Duration(milliseconds: 50), (timer) {
-                          fastProvider.incrementOperation(1);
+                          fastProvider.incrementOperation(1, user);
                         });
                       }
                     });
@@ -110,7 +113,7 @@ class _FastCounterState extends State<FastCounter> {
                   },
                   child: FloatingActionButton(
                     heroTag: 'fast' 'minus',
-                    onPressed: () => fastProvider.incrementOperation(1),
+                    onPressed: () => fastProvider.incrementOperation(1, user),
                     backgroundColor: const Color.fromARGB(255, 162, 57, 57),
                     child: const Icon(Icons.add, color: Colors.white),
                   ),

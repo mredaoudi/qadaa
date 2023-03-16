@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/prayer_provider.dart';
+import '../providers/people_provider.dart';
 import 'dart:async';
 
 class PrayerCounter extends StatefulWidget {
@@ -27,6 +28,7 @@ class _PrayerCounterState extends State<PrayerCounter> {
   @override
   Widget build(BuildContext context) {
     final prayerProvider = Provider.of<PrayerProvider>(context, listen: false);
+    final peopleProvider = Provider.of<PeopleProvider>(context, listen: false);
     return Column(
       children: [
         Padding(
@@ -52,7 +54,11 @@ class _PrayerCounterState extends State<PrayerCounter> {
                     if (!_longPressCanceled) {
                       _timer = Timer.periodic(const Duration(milliseconds: 50),
                           (timer) {
-                        prayerProvider.incrementOperation(widget.prayer, -1);
+                        prayerProvider.incrementOperation(
+                          prayer: widget.prayer,
+                          amount: -1,
+                          user: peopleProvider.currentUser,
+                        );
                       });
                     }
                   });
@@ -63,7 +69,11 @@ class _PrayerCounterState extends State<PrayerCounter> {
                 child: FloatingActionButton(
                   heroTag: '${widget.prayer}' 'plus',
                   onPressed: () async {
-                    prayerProvider.incrementOperation(widget.prayer, -1);
+                    prayerProvider.incrementOperation(
+                      prayer: widget.prayer,
+                      amount: -1,
+                      user: peopleProvider.currentUser,
+                    );
                   },
                   backgroundColor: const Color(0xFF4DAB8F),
                   child: const Icon(
@@ -94,7 +104,11 @@ class _PrayerCounterState extends State<PrayerCounter> {
                     if (!_longPressCanceled) {
                       _timer = Timer.periodic(const Duration(milliseconds: 50),
                           (timer) {
-                        prayerProvider.incrementOperation(widget.prayer, 1);
+                        prayerProvider.incrementOperation(
+                          prayer: widget.prayer,
+                          amount: 1,
+                          user: peopleProvider.currentUser,
+                        );
                       });
                     }
                   });
@@ -104,8 +118,11 @@ class _PrayerCounterState extends State<PrayerCounter> {
                 },
                 child: FloatingActionButton(
                   heroTag: '${widget.prayer}' 'minus',
-                  onPressed: () =>
-                      prayerProvider.incrementOperation(widget.prayer, 1),
+                  onPressed: () => prayerProvider.incrementOperation(
+                    prayer: widget.prayer,
+                    amount: 1,
+                    user: peopleProvider.currentUser,
+                  ),
                   backgroundColor: const Color.fromARGB(255, 162, 57, 57),
                   child: const Icon(Icons.add, color: Colors.white),
                 ),

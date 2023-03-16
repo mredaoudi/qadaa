@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '../components/period_counter.dart';
 import '../providers/prayer_provider.dart';
+import '../providers/people_provider.dart';
 
 class PrayerPeriodScreen extends StatefulWidget {
   const PrayerPeriodScreen({super.key});
@@ -54,6 +55,7 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
   @override
   Widget build(BuildContext context) {
     final prayerProvider = Provider.of<PrayerProvider>(context);
+    final peopleProvider = Provider.of<PeopleProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 253, 250),
       appBar: AppBar(
@@ -135,7 +137,11 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
                 : () async {
                     for (var pray in prays.keys) {
                       if (prays[pray] == true) {
-                        prayerProvider.incrementOperation(pray, _amount);
+                        prayerProvider.incrementOperation(
+                          prayer: pray,
+                          amount: _amount,
+                          user: peopleProvider.currentUser,
+                        );
                       }
                     }
                     Navigator.pop(context);

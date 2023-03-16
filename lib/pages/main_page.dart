@@ -5,6 +5,7 @@ import '../components/fast_counter.dart';
 import '../components/main_drawer.dart';
 import '../providers/prayer_provider.dart';
 import '../providers/fast_provider.dart';
+import '../providers/people_provider.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -13,6 +14,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final prayerProvider = Provider.of<PrayerProvider>(context);
     final fastProvider = Provider.of<FastProvider>(context);
+    final peopleProvider = Provider.of<PeopleProvider>(context);
     return MaterialApp(
       title: "Qadaa",
       theme: ThemeData(
@@ -27,18 +29,18 @@ class MainScreen extends StatelessWidget {
             centerTitle: true,
             title: RichText(
               textAlign: TextAlign.center,
-              text: const TextSpan(
-                style: TextStyle(
+              text: TextSpan(
+                style: const TextStyle(
                   fontSize: 20.0,
                 ),
                 children: <TextSpan>[
-                  TextSpan(
+                  const TextSpan(
                     text: 'Qadaa\n',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextSpan(
-                    text: 'Mohammed',
-                    style: TextStyle(fontSize: 13, fontFamily: 'Courier'),
+                    text: capitalize(peopleProvider.currentUser),
+                    style: const TextStyle(fontSize: 13, fontFamily: 'Courier'),
                   ),
                 ],
               ),
@@ -99,4 +101,8 @@ class MainScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+String capitalize(text) {
+  return "${text[0].toUpperCase()}${text.substring(1).toLowerCase()}";
 }

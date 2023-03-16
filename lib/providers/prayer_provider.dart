@@ -11,32 +11,35 @@ class PrayerProvider extends ChangeNotifier {
     'Isha': 0,
   };
 
-  PrayerProvider() {
-    setup();
+  PrayerProvider({user}) {
+    if (user != null) {
+      setup(user);
+    }
   }
 
-  void setup() {
+  void setup(String user) {
     var box = Hive.box('prayers');
     for (var pkey in _prayers.keys) {
-      _prayers[pkey] = box.get(pkey) ?? 0;
+      _prayers[pkey] = box.get('${user}_$pkey') ?? 0;
     }
   }
 
   get prayers => _prayers;
 
-  void incrementOperation(String prayer, int amount) {
+  void incrementOperation(
+      {required String prayer, required int amount, required String user}) {
     var value = max(_prayers[prayer]! + amount, 0);
     _prayers[prayer] = value;
     var box = Hive.box('prayers');
-    box.put(prayer, value);
+    box.put('${user}_$prayer', value);
     notifyListeners();
   }
 
-  void reset() {
+  void reset({required String user}) {
     var box = Hive.box('prayers');
     for (var pkey in _prayers.keys) {
       _prayers[pkey] = 0;
-      box.put(pkey, 0);
+      box.put('${user}_$pkey', 0);
     }
   }
 }
