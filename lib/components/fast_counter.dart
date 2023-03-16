@@ -37,7 +37,7 @@ class _FastCounterState extends State<FastCounter> {
           child: Text(
             "Days:",
             style: TextStyle(
-              fontSize: 30,
+              fontSize: 32,
               color: Color.fromARGB(255, 126, 126, 126),
               // fontWeight: FontWeight.bold,
             ),

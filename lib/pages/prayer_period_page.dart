@@ -146,9 +146,9 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
                     }
                     Navigator.pop(context);
                   },
-            child: const Text(
-              "Add",
-              style: TextStyle(fontSize: 20),
+            child: Text(
+              _amount >= 0 ? "Add" : "Subtract",
+              style: const TextStyle(fontSize: 20),
             ),
           ),
         ],

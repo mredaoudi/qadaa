@@ -34,14 +34,16 @@ class MainScreen extends StatelessWidget {
                   fontSize: 20.0,
                 ),
                 children: <TextSpan>[
-                  const TextSpan(
-                    text: 'Qadaa\n',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
                   TextSpan(
-                    text: capitalize(peopleProvider.currentUser),
-                    style: const TextStyle(fontSize: 13, fontFamily: 'Courier'),
+                    text: peopleProvider.currentUser != ""
+                        ? capitalize(text: peopleProvider.currentUser)
+                        : "",
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
+                  // TextSpan(
+                  //   text: capitalize(peopleProvider.currentUser),
+                  //   style: const TextStyle(fontSize: 13, fontFamily: 'Courier'),
+                  // ),
                 ],
               ),
             ),
@@ -103,6 +105,9 @@ class MainScreen extends StatelessWidget {
   }
 }
 
-String capitalize(text) {
-  return "${text[0].toUpperCase()}${text.substring(1).toLowerCase()}";
+String capitalize({text}) {
+  if (text != null) {
+    return "${text[0].toUpperCase()}${text.substring(1).toLowerCase()}";
+  }
+  return "";
 }

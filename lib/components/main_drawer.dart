@@ -26,17 +26,17 @@ class _NavDrawerState extends State<NavDrawer> {
         padding: EdgeInsets.zero,
         children: <Widget>[
           const SizedBox(
-            height: 128,
+            height: 150,
             child: DrawerHeader(
               decoration: BoxDecoration(
                 color: Color(0xFF4E6E81),
               ),
               child: Text(
-                'Menu',
+                'قضاء',
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontFamily: 'Roboto-Regular'),
+                    color: Color(0xffF9DBBB),
+                    fontSize: 40,
+                    fontFamily: 'Amiri'),
                 textAlign: TextAlign.center,
               ),
             ),

@@ -42,6 +42,6 @@ flutter:
     - family: Roboto
       fonts:
         - asset: fonts/Roboto-Regular.ttf
-    - family: SecularOne
+    - family: Amiri
       fonts:
-        - asset: fonts/SecularOne-Regular.ttf
+        - asset: fonts/Amiri-Regular.ttf
