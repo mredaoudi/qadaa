@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '../components/period_counter.dart';

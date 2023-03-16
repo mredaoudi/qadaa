@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:qadaa/components/prayer_counter.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({Key? key}) : super(key: key);
@@ -17,15 +16,15 @@ class OnBoardingPageState extends State<OnBoardingPage> {
     Navigator.pushNamed(context, '/setup_user');
   }
 
-  Widget _buildFullscreenImage() {
-    return Image.asset(
-      'assets/fullscreen.jpg',
-      fit: BoxFit.cover,
-      height: double.infinity,
-      width: double.infinity,
-      alignment: Alignment.center,
-    );
-  }
+  // Widget _buildFullscreenImage() {
+  //   return Image.asset(
+  //     'assets/fullscreen.jpg',
+  //     fit: BoxFit.cover,
+  //     height: double.infinity,
+  //     width: double.infinity,
+  //     alignment: Alignment.center,
+  //   );
+  // }
 
   Widget _buildImage(String assetName, [double width = 350]) {
     return Image.asset('assets/$assetName', width: width);
