@@ -5,6 +5,14 @@ import '../providers/prayer_provider.dart';
 import '../providers/people_provider.dart';
 import '../providers/theme_provider.dart';
 
+const List<Widget> prayers = <Widget>[
+  Text('Fajr'),
+  Text('Zuhr'),
+  Text('Asr'),
+  Text('Maghrib'),
+  Text('Isha')
+];
+
 class PrayerPeriodScreen extends StatefulWidget {
   const PrayerPeriodScreen({super.key});
 
@@ -21,13 +29,8 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
     'weeks': {"amount": 0, "increment": 7, "label": "Weeks"},
     'days': {"amount": 0, "increment": 1, "label": "Days"}
   };
-  var prays = {
-    'Fajr': false,
-    'Zuhr': false,
-    'Asr': false,
-    'Maghrib': false,
-    'Isha': false
-  };
+
+  final List<bool> _selectedPrayers = <bool>[false, false, false, false, false];
 
   void incrementPeriod(String period, int amount) {
     setState(() {
@@ -43,8 +46,8 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
 
   bool checkForm() {
     var praySelected = false;
-    for (var pray in prays.keys) {
-      if (prays[pray] == true) {
+    for (var pray in _selectedPrayers) {
+      if (pray == true) {
         praySelected = true;
         break;
       }
@@ -105,23 +108,29 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
                     operation: incrementPeriod),
               )
               .toList(),
-          ...prays.entries.map((entry) => SwitchListTile(
-                contentPadding: const EdgeInsets.fromLTRB(60, 0, 60, 0),
-                title: Text(
-                  entry.key,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: themeProvider.text(),
-                  ),
-                ),
-                value: entry.value,
-                activeColor: themeProvider.icon(),
-                onChanged: (bool value) {
-                  setState(() {
-                    prays[entry.key] = value;
-                  });
-                },
-              )),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 40),
+            child: ToggleButtons(
+              direction: Axis.horizontal,
+              onPressed: (int index) {
+                // All buttons are selectable.
+                setState(() {
+                  _selectedPrayers[index] = !_selectedPrayers[index];
+                });
+              },
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              selectedBorderColor: themeProvider.icon(),
+              selectedColor: Colors.white,
+              fillColor: themeProvider.icon(),
+              color: themeProvider.text(),
+              constraints: const BoxConstraints(
+                minHeight: 40.0,
+                minWidth: 80.0,
+              ),
+              isSelected: _selectedPrayers,
+              children: prayers,
+            ),
+          ),
           ElevatedButton(
             style: ButtonStyle(
               backgroundColor:
@@ -137,10 +146,11 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
             onPressed: !checkForm()
                 ? null
                 : () async {
-                    for (var pray in prays.keys) {
-                      if (prays[pray] == true) {
+                    List prayIndex = ['Fajr', 'Zuhr', 'Asr', 'Maghrib', 'Isha'];
+                    for (var i = 0; i < _selectedPrayers.length; i++) {
+                      if (_selectedPrayers[i] == true) {
                         prayerProvider.incrementOperation(
-                          prayer: pray,
+                          prayer: prayIndex[i],
                           amount: _amount,
                           user: peopleProvider.currentUser,
                         );
