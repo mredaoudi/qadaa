@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/theme_provider.dart';
 
 class PeriodCounter extends StatelessWidget {
   Map info;
@@ -13,14 +15,15 @@ class PeriodCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Container(
       padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
       child: Column(
         children: [
           Text(info['label'],
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 16,
-                  color: Color.fromARGB(180, 0, 0, 0),
+                  color: themeProvider.text(),
                   fontWeight: FontWeight.bold)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -31,16 +34,17 @@ class PeriodCounter extends StatelessWidget {
                   onPressed: () => operation(period, -1),
                   icon: const Icon(Icons.remove),
                   iconSize: 32.0,
-                  color: const Color(0xFF4E6E81),
+                  color: themeProvider.icon(),
                 ),
               ),
               Expanded(
                 flex: 3,
                 child: Text(
                   info['amount'].toString(),
-                  style: const TextStyle(
-                      fontSize: 20.0,
-                      color: Color.fromARGB(255, 126, 126, 126)),
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: themeProvider.text(),
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -50,7 +54,7 @@ class PeriodCounter extends StatelessWidget {
                   onPressed: () => operation(period, 1),
                   icon: const Icon(Icons.add),
                   iconSize: 32.0,
-                  color: const Color(0xFF4E6E81),
+                  color: themeProvider.icon(),
                 ),
               ),
             ],

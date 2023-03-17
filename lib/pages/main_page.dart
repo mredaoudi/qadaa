@@ -6,6 +6,7 @@ import '../components/main_drawer.dart';
 import '../providers/prayer_provider.dart';
 import '../providers/fast_provider.dart';
 import '../providers/people_provider.dart';
+import '../providers/theme_provider.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -15,6 +16,7 @@ class MainScreen extends StatelessWidget {
     final prayerProvider = Provider.of<PrayerProvider>(context);
     final fastProvider = Provider.of<FastProvider>(context);
     final peopleProvider = Provider.of<PeopleProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       title: "Qadaa",
       theme: ThemeData(
@@ -23,8 +25,9 @@ class MainScreen extends StatelessWidget {
       home: DefaultTabController(
         length: 2,
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           drawer: const NavDrawer(),
-          backgroundColor: const Color.fromARGB(255, 255, 253, 250),
+          backgroundColor: themeProvider.background(),
           appBar: AppBar(
             centerTitle: true,
             title: RichText(
@@ -47,7 +50,7 @@ class MainScreen extends StatelessWidget {
                 ],
               ),
             ),
-            backgroundColor: const Color(0xFF4E6E81),
+            backgroundColor: themeProvider.appbar(),
             bottom: const TabBar(
               tabs: [
                 Tab(text: 'Prayers'),

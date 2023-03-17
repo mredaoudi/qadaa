@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../providers/people_provider.dart';
 import '../providers/prayer_provider.dart';
 import '../providers/fast_provider.dart';
+import '../providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class NavDrawer extends StatefulWidget {
@@ -20,18 +21,20 @@ class _NavDrawerState extends State<NavDrawer> {
     final prayerProvider = Provider.of<PrayerProvider>(context);
     final fastProvider = Provider.of<FastProvider>(context);
     final peopleProvider = Provider.of<PeopleProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
     final TextStyle textStyle = theme.textTheme.bodyMedium!;
     return Drawer(
+      backgroundColor: themeProvider.background(),
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          const SizedBox(
+          SizedBox(
             height: 150,
             child: DrawerHeader(
               decoration: BoxDecoration(
-                color: Color(0xFF4E6E81),
+                color: themeProvider.appbar(),
               ),
-              child: Text(
+              child: const Text(
                 'قضاء',
                 style: TextStyle(
                     color: Color(0xffF9DBBB),
@@ -50,11 +53,20 @@ class _NavDrawerState extends State<NavDrawer> {
                       !_isExpanded; //using set state just to exemplify
                 });
               },
-              title: const Text('People'),
-              leading: Icon(_isExpanded ? Icons.people_outline : Icons.people),
-              trailing: Icon(_isExpanded
-                  ? Icons.keyboard_arrow_up
-                  : Icons.keyboard_arrow_down),
+              title: Text(
+                'People',
+                style: TextStyle(color: themeProvider.text()),
+              ),
+              leading: Icon(
+                _isExpanded ? Icons.people_outline : Icons.people,
+                color: themeProvider.icon(),
+              ),
+              trailing: Icon(
+                _isExpanded
+                    ? Icons.keyboard_arrow_up
+                    : Icons.keyboard_arrow_down,
+                color: themeProvider.icon(),
+              ),
               children: <Widget>[
                 ...peopleProvider
                     .getPeople()
@@ -63,9 +75,16 @@ class _NavDrawerState extends State<NavDrawer> {
                         padding: const EdgeInsets.only(left: 30, right: 60),
                         child: ListTile(
                           leading: e == peopleProvider.currentUser
-                              ? const Icon(Icons.how_to_reg)
-                              : const Icon(Icons.person_outline),
-                          title: Text(capitalize(e)),
+                              ? Icon(
+                                  Icons.how_to_reg,
+                                  color: themeProvider.icon(),
+                                )
+                              : Icon(
+                                  Icons.person_outline,
+                                  color: themeProvider.icon(),
+                                ),
+                          title: Text(capitalize(e),
+                              style: TextStyle(color: themeProvider.text())),
                           onTap: () async {
                             if (e != peopleProvider.currentUser) {
                               peopleProvider.setCurrentUser(e);
@@ -81,48 +100,72 @@ class _NavDrawerState extends State<NavDrawer> {
                 Padding(
                   padding: const EdgeInsets.only(left: 30, right: 60),
                   child: ListTile(
-                    title: const Icon(
-                      Icons.add_circle_outlined,
-                      size: 24,
-                    ),
+                    title: Icon(Icons.add_circle_outlined,
+                        size: 24, color: themeProvider.icon()),
                     onTap: () => {
                       showDialog(
                         context: context,
                         builder: (_) {
-                          var messageController = TextEditingController();
-                          return AlertDialog(
-                            title: const Text('Add a new person'),
-                            content: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  TextFormField(
-                                    controller: messageController,
-                                    decoration:
-                                        const InputDecoration(hintText: 'Name'),
-                                  ),
-                                ],
+                          List existingPeople = peopleProvider.getPeople();
+                          String personError = "";
+                          String name = "";
+                          return StatefulBuilder(builder: (context, setState) {
+                            return AlertDialog(
+                              title: const Text('Add a new person'),
+                              content: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    if (personError != "")
+                                      Text(
+                                        personError,
+                                        style:
+                                            const TextStyle(color: Colors.red),
+                                      ),
+                                    TextFormField(
+                                      onChanged: (value) {
+                                        setState(() {
+                                          name = value;
+                                          if (existingPeople.contains(name)) {
+                                            setState(() {
+                                              personError =
+                                                  "This username exists already";
+                                            });
+                                          } else {
+                                            setState(() {
+                                              personError = "";
+                                            });
+                                          }
+                                        });
+                                      },
+                                      decoration: const InputDecoration(
+                                          hintText: 'Name'),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.of(context, rootNavigator: true)
-                                        .pop('dialog'),
-                                child: const Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () async {
-                                  var message = messageController.text;
-                                  if (message.isNotEmpty) {
-                                    peopleProvider.createPerson(name: message);
-                                    Navigator.of(context, rootNavigator: true)
-                                        .pop('dialog');
-                                  }
-                                },
-                                child: const Text('Create'),
-                              ),
-                            ],
-                          );
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pop('dialog'),
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () async {
+                                    if (name.isNotEmpty) {
+                                      if (!existingPeople.contains(name)) {
+                                        peopleProvider.createPerson(name: name);
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pop('dialog');
+                                      }
+                                    }
+                                  },
+                                  child: const Text('Create'),
+                                ),
+                              ],
+                            );
+                          });
                         },
                       )
                     },
@@ -132,18 +175,23 @@ class _NavDrawerState extends State<NavDrawer> {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.save_alt),
-            title: const Text('Save counters'),
+            leading: Icon(Icons.save_alt, color: themeProvider.icon()),
+            title: Text('Save counters',
+                style: TextStyle(color: themeProvider.text())),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: const Icon(Icons.wb_sunny),
-            title: const Text('Dark mode'),
-            onTap: () => {Navigator.of(context).pop()},
+            leading: Icon(Icons.wb_sunny, color: themeProvider.icon()),
+            title: Text('Dark mode',
+                style: TextStyle(color: themeProvider.text())),
+            onTap: () async {
+              themeProvider.changeTheme();
+              Navigator.of(context).pop();
+            },
           ),
           ListTile(
-            leading: const Icon(Icons.info_outline),
-            title: const Text('About'),
+            leading: Icon(Icons.info_outline, color: themeProvider.icon()),
+            title: Text('About', style: TextStyle(color: themeProvider.text())),
             onTap: () => {
               showAboutDialog(
                 context: context,

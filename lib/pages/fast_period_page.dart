@@ -2,6 +2,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '../providers/fast_provider.dart';
 import '../providers/people_provider.dart';
+import '../providers/theme_provider.dart';
 import '../components/period_counter.dart';
 
 class FastPeriodScreen extends StatefulWidget {
@@ -35,11 +36,12 @@ class _FastPeriodScreenState extends State<FastPeriodScreen> {
   Widget build(BuildContext context) {
     final fastProvider = Provider.of<FastProvider>(context);
     final peopleProvider = Provider.of<PeopleProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 253, 250),
+      backgroundColor: themeProvider.background(),
       appBar: AppBar(
         title: const Icon(Icons.edit_calendar_outlined),
-        backgroundColor: const Color(0xFF4E6E81),
+        backgroundColor: themeProvider.appbar(),
         centerTitle: true,
       ),
       body: Column(
@@ -87,7 +89,8 @@ class _FastPeriodScreenState extends State<FastPeriodScreen> {
               backgroundColor:
                   MaterialStateProperty.resolveWith<Color>((states) {
                 if (states.contains(MaterialState.disabled)) {
-                  return const Color(0xFFD6D6D6); // Disabled color
+                  return const Color.fromARGB(
+                      255, 125, 125, 125); // Disabled color
                 }
                 return const Color(0xFF4E6E81); // Regular color
               }),

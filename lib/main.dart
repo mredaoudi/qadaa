@@ -8,6 +8,7 @@ import 'pages/user_form.dart';
 import 'providers/prayer_provider.dart';
 import 'providers/fast_provider.dart';
 import 'providers/people_provider.dart';
+import 'providers/theme_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,6 +17,7 @@ void main() async {
   await Hive.openBox('prayers');
   await Hive.openBox('fasts');
   await Hive.openBox('people');
+  await Hive.openBox('theme');
   // var prefs = await SharedPreferences.getInstance();
   // var boolKey = 'isFirstTime';
   // var isFirstTime = prefs.getBool(boolKey) ?? true;
@@ -31,6 +33,7 @@ void main() async {
         ),
         ChangeNotifierProvider<FastProvider>(create: (_) => FastProvider()),
         ChangeNotifierProvider<PeopleProvider>(create: (_) => PeopleProvider()),
+        ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),
       ],
       child: MaterialApp(
         title: 'Qadaa',

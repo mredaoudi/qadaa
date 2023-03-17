@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/prayer_provider.dart';
 import '../providers/people_provider.dart';
+import '../providers/theme_provider.dart';
 import 'dart:async';
 
 class PrayerCounter extends StatefulWidget {
@@ -29,14 +30,15 @@ class _PrayerCounterState extends State<PrayerCounter> {
   Widget build(BuildContext context) {
     final prayerProvider = Provider.of<PrayerProvider>(context, listen: false);
     final peopleProvider = Provider.of<PeopleProvider>(context, listen: false);
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 15),
           child: Text(widget.prayer,
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 20,
-                  color: Color.fromARGB(255, 126, 126, 126),
+                  color: themeProvider.text(),
                   fontWeight: FontWeight.bold)),
         ),
         Row(
@@ -75,7 +77,7 @@ class _PrayerCounterState extends State<PrayerCounter> {
                       user: peopleProvider.currentUser,
                     );
                   },
-                  backgroundColor: const Color(0xFF4DAB8F),
+                  backgroundColor: themeProvider.minus(),
                   child: const Icon(
                     Icons.remove,
                     color: Colors.white,
@@ -87,8 +89,7 @@ class _PrayerCounterState extends State<PrayerCounter> {
               flex: 3,
               child: Text(
                 widget.amount.toString(),
-                style: const TextStyle(
-                    fontSize: 40.0, color: Color.fromARGB(255, 126, 126, 126)),
+                style: TextStyle(fontSize: 40.0, color: themeProvider.text()),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -123,7 +124,7 @@ class _PrayerCounterState extends State<PrayerCounter> {
                     amount: 1,
                     user: peopleProvider.currentUser,
                   ),
-                  backgroundColor: const Color.fromARGB(255, 162, 57, 57),
+                  backgroundColor: themeProvider.plus(),
                   child: const Icon(Icons.add, color: Colors.white),
                 ),
               ),

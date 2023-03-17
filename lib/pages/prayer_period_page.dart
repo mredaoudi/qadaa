@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../components/period_counter.dart';
 import '../providers/prayer_provider.dart';
 import '../providers/people_provider.dart';
+import '../providers/theme_provider.dart';
 
 class PrayerPeriodScreen extends StatefulWidget {
   const PrayerPeriodScreen({super.key});
@@ -55,11 +56,12 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
   Widget build(BuildContext context) {
     final prayerProvider = Provider.of<PrayerProvider>(context);
     final peopleProvider = Provider.of<PeopleProvider>(context, listen: false);
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 253, 250),
+      backgroundColor: themeProvider.background(),
       appBar: AppBar(
         title: const Icon(Icons.edit_calendar_outlined),
-        backgroundColor: const Color(0xFF4E6E81),
+        backgroundColor: themeProvider.appbar(),
         centerTitle: true,
       ),
       body: Column(
@@ -107,13 +109,13 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
                 contentPadding: const EdgeInsets.fromLTRB(60, 0, 60, 0),
                 title: Text(
                   entry.key,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(180, 0, 0, 0),
+                    color: themeProvider.text(),
                   ),
                 ),
                 value: entry.value,
-                activeColor: const Color(0xFF4E6E81),
+                activeColor: themeProvider.icon(),
                 onChanged: (bool value) {
                   setState(() {
                     prays[entry.key] = value;
@@ -125,7 +127,8 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
               backgroundColor:
                   MaterialStateProperty.resolveWith<Color>((states) {
                 if (states.contains(MaterialState.disabled)) {
-                  return const Color(0xFFD6D6D6); // Disabled color
+                  return const Color.fromARGB(
+                      255, 125, 125, 125); // Disabled color
                 }
                 return const Color(0xFF4E6E81); // Regular color
               }),
