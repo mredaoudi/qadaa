@@ -175,12 +175,6 @@ class _NavDrawerState extends State<NavDrawer> {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.save_alt, color: themeProvider.icon()),
-            title: Text('Save counters',
-                style: TextStyle(color: themeProvider.text())),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
-          ListTile(
             leading: Icon(Icons.wb_sunny, color: themeProvider.icon()),
             title: Text('Dark mode',
                 style: TextStyle(color: themeProvider.text())),
@@ -214,12 +208,7 @@ class _NavDrawerState extends State<NavDrawer> {
                             style: textStyle,
                             text:
                                 "Qadaa is an application made to help Muslims fulfill"
-                                'their duties that they missed, like prayers and fasts. '
-                                'Qadaa is part of the Ahlulbayt.app network.\n'),
-                        TextSpan(
-                            style: textStyle.copyWith(
-                                color: theme.colorScheme.primary),
-                            text: 'https://ahlulbayt.app'),
+                                'their duties that they missed, like prayers and fasts. '),
                       ],
                     ),
                   ),

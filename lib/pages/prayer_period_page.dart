@@ -119,9 +119,10 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
                 });
               },
               borderRadius: const BorderRadius.all(Radius.circular(8)),
-              selectedBorderColor: themeProvider.icon(),
+              borderColor: Colors.grey.withOpacity(0.5),
+              selectedBorderColor: Colors.white,
               selectedColor: Colors.white,
-              fillColor: themeProvider.icon(),
+              fillColor: const Color(0xFF4E6E81),
               color: themeProvider.text(),
               constraints: const BoxConstraints(
                 minHeight: 40.0,

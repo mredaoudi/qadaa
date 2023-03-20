@@ -35,7 +35,7 @@ class OnBoardingPageState extends State<OnBoardingPage> {
     const bodyStyle = TextStyle(fontSize: 19.0);
 
     const pageDecoration = PageDecoration(
-      titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
+      titleTextStyle: TextStyle(fontSize: 23.0, fontWeight: FontWeight.w700),
       bodyTextStyle: bodyStyle,
       bodyPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       pageColor: Colors.white,
@@ -56,6 +56,26 @@ class OnBoardingPageState extends State<OnBoardingPage> {
           body:
               "Welcome to the Qadaa app, an app to help you catch up to and keep with your religious duties.",
           image: _buildImage('icon/icon.png'),
+          decoration: pageDecoration,
+        ),
+        PageViewModel(
+          title: "الصَّلَاةُ \nKeep track of your missed mandatory prayers",
+          body:
+              "Qadaa app features a counter for each of the five daily prayers to help Muslims keep track of their missed prayers.",
+          image: _buildImage('pray1.png'),
+          decoration: pageDecoration,
+        ),
+        PageViewModel(
+          title: "الصَّوْمُ \nKeep track of your missed mandatory fasts",
+          body: "Qadaa also allows users to easily log missed fasts.",
+          image: _buildImage('sunset.png'),
+          decoration: pageDecoration,
+        ),
+        PageViewModel(
+          title: "Multiple profiles",
+          body:
+              "Finally, Qadaa allows users to manage multiple profiles within the app, which is useful for helping you keep track of missed prayers and fasts for other people as well. ",
+          image: _buildImage('pray2.png'),
           decoration: pageDecoration,
         ),
         // PageViewModel(

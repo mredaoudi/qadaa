@@ -38,12 +38,20 @@ class UserFormState extends State<UserForm> {
               padding: const EdgeInsets.fromLTRB(100, 100, 100, 50),
               child: Image.asset('assets/icon/icon.png'),
             ),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+              child: Text(
+                "بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
               child: TextFormField(
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
-                  labelText: 'Enter your username',
+                  labelText: 'Enter Your Name',
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -75,7 +83,7 @@ class UserFormState extends State<UserForm> {
                         Navigator.pushNamed(context, '/');
                       },
                 child: const Text(
-                  "Submit",
+                  "Create user",
                   style: TextStyle(fontSize: 20),
                 ),
               ),

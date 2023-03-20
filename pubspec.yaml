@@ -37,6 +37,9 @@ flutter:
     - assets/img1.jpg
     - assets/img2.jpg
     - assets/img3.jpg
+    - assets/pray1.png
+    - assets/pray2.png
+    - assets/sunset.png
     - assets/icon/icon.png
   fonts:
     - family: Roboto
