@@ -10,7 +10,6 @@ import 'providers/fast_provider.dart';
 import 'providers/people_provider.dart';
 import 'providers/theme_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-//import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   await Hive.initFlutter();
