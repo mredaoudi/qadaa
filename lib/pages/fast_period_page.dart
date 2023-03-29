@@ -1,8 +1,8 @@
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../providers/fast_provider.dart';
-import '../providers/people_provider.dart';
 import '../providers/theme_provider.dart';
+import '../providers/people_provider.dart';
 import '../components/period_counter.dart';
 
 class FastPeriodScreen extends StatefulWidget {

@@ -18,9 +18,6 @@ void main() async {
   await Hive.openBox('fasts');
   await Hive.openBox('people');
   await Hive.openBox('theme');
-  // var prefs = await SharedPreferences.getInstance();
-  // var boolKey = 'isFirstTime';
-  // var isFirstTime = prefs.getBool(boolKey) ?? true;
   var box = Hive.box('people');
   var currentUser = box.get('currentUser') ?? '';
   runApp(
@@ -41,7 +38,7 @@ void main() async {
         routes: {
           '/': (context) => const MainScreen(),
           '/intro': (context) => const OnBoardingPage(),
-          '/setup_user': (context) => const UserForm(firstTime: true),
+          '/setup_user': (context) => const UserForm(),
           '/period/prayers': (context) => const PrayerPeriodScreen(),
           '/period/fasts': (context) => const FastPeriodScreen()
         },

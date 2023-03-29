@@ -1,9 +1,9 @@
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import '../components/period_counter.dart';
+import 'package:provider/provider.dart';
+import '../providers/theme_provider.dart';
 import '../providers/prayer_provider.dart';
 import '../providers/people_provider.dart';
-import '../providers/theme_provider.dart';
+import '../components/period_counter.dart';
 
 const List<Widget> prayers = <Widget>[
   Text('Fajr'),

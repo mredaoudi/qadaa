@@ -1,11 +1,11 @@
+import '../utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:qadaa/providers/people_provider.dart';
 
-// Create a Form widget.
 class UserForm extends StatefulWidget {
-  final bool firstTime;
-  const UserForm({super.key, required this.firstTime});
+  const UserForm({super.key});
 
   @override
   UserFormState createState() {
@@ -13,14 +13,7 @@ class UserForm extends StatefulWidget {
   }
 }
 
-// Create a corresponding State class.
-// This class holds data related to the form.
 class UserFormState extends State<UserForm> {
-  // Create a global key that uniquely identifies the Form widget
-  // and allows validation of the form.
-  //
-  // Note: This is a GlobalKey<FormState>,
-  // not a GlobalKey<UserFormState>.
   final _formKey = GlobalKey<FormState>();
 
   String text = "";
@@ -29,6 +22,7 @@ class UserFormState extends State<UserForm> {
   Widget build(BuildContext context) {
     final peopleProvider = Provider.of<PeopleProvider>(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Form(
         key: _formKey,
         child: Column(
@@ -49,6 +43,9 @@ class UserFormState extends State<UserForm> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
               child: TextFormField(
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]")),
+                ],
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: 'Enter Your Name',
@@ -77,8 +74,8 @@ class UserFormState extends State<UserForm> {
                     ? null
                     : () async {
                         peopleProvider.createPerson(
-                          name: text,
-                          firstTime: widget.firstTime,
+                          name: serverName(text),
+                          firstTime: true,
                         );
                         Navigator.pushNamed(context, '/');
                       },

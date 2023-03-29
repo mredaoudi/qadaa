@@ -31,8 +31,8 @@ class PeopleProvider extends ChangeNotifier {
       var userList = box.get('users');
       userList.add(name);
       box.put('users', userList);
-      notifyListeners();
     }
+    notifyListeners();
   }
 
   List getPeople() {

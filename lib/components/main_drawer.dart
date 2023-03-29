@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import '../utils.dart';
 import '../providers/people_provider.dart';
 import '../providers/prayer_provider.dart';
 import '../providers/fast_provider.dart';
@@ -83,8 +85,10 @@ class _NavDrawerState extends State<NavDrawer> {
                                   Icons.person_outline,
                                   color: themeProvider.icon(),
                                 ),
-                          title: Text(capitalize(e),
-                              style: TextStyle(color: themeProvider.text())),
+                          title: Text(
+                            uiName(e),
+                            style: TextStyle(color: themeProvider.text()),
+                          ),
                           onTap: () async {
                             if (e != peopleProvider.currentUser) {
                               peopleProvider.setCurrentUser(e);
@@ -122,10 +126,15 @@ class _NavDrawerState extends State<NavDrawer> {
                                             const TextStyle(color: Colors.red),
                                       ),
                                     TextFormField(
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp("[a-zA-Z]")),
+                                      ],
                                       onChanged: (value) {
                                         setState(() {
                                           name = value;
-                                          if (existingPeople.contains(name)) {
+                                          if (existingPeople
+                                              .contains(serverName(name))) {
                                             setState(() {
                                               personError =
                                                   "This username exists already";
@@ -153,8 +162,11 @@ class _NavDrawerState extends State<NavDrawer> {
                                 TextButton(
                                   onPressed: () async {
                                     if (name.isNotEmpty) {
-                                      if (!existingPeople.contains(name)) {
-                                        peopleProvider.createPerson(name: name);
+                                      var modifiedName = serverName(name);
+                                      if (!existingPeople
+                                          .contains(modifiedName)) {
+                                        peopleProvider.createPerson(
+                                            name: modifiedName);
                                         Navigator.of(context,
                                                 rootNavigator: true)
                                             .pop('dialog');
@@ -220,8 +232,4 @@ class _NavDrawerState extends State<NavDrawer> {
       ),
     );
   }
-}
-
-String capitalize(text) {
-  return "${text[0].toUpperCase()}${text.substring(1).toLowerCase()}";
 }

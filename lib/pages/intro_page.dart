@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -15,16 +15,6 @@ class OnBoardingPageState extends State<OnBoardingPage> {
   void _onIntroEnd(context) {
     Navigator.pushNamed(context, '/setup_user');
   }
-
-  // Widget _buildFullscreenImage() {
-  //   return Image.asset(
-  //     'assets/fullscreen.jpg',
-  //     fit: BoxFit.cover,
-  //     height: double.infinity,
-  //     width: double.infinity,
-  //     alignment: Alignment.center,
-  //   );
-  // }
 
   Widget _buildImage(String assetName, [double width = 350]) {
     return Image.asset('assets/$assetName', width: width);

@@ -20,7 +20,7 @@ class PrayerProvider extends ChangeNotifier {
   void setup(String user) {
     var box = Hive.box('prayers');
     for (var pkey in _prayers.keys) {
-      _prayers[pkey] = box.get('${user}_$pkey') ?? 0;
+      _prayers[pkey] = box.get('${user}__$pkey') ?? 0;
     }
   }
 
@@ -31,7 +31,7 @@ class PrayerProvider extends ChangeNotifier {
     var value = max(_prayers[prayer]! + amount, 0);
     _prayers[prayer] = value;
     var box = Hive.box('prayers');
-    box.put('${user}_$prayer', value);
+    box.put('${user}__$prayer', value);
     notifyListeners();
   }
 
@@ -39,7 +39,7 @@ class PrayerProvider extends ChangeNotifier {
     var box = Hive.box('prayers');
     for (var pkey in _prayers.keys) {
       _prayers[pkey] = 0;
-      box.put('${user}_$pkey', 0);
+      box.put('${user}__$pkey', 0);
     }
   }
 }

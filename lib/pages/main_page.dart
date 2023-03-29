@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../utils.dart';
 import '../components/prayer_counter.dart';
 import '../components/fast_counter.dart';
 import '../components/main_drawer.dart';
@@ -17,6 +18,7 @@ class MainScreen extends StatelessWidget {
     final fastProvider = Provider.of<FastProvider>(context);
     final peopleProvider = Provider.of<PeopleProvider>(context);
     final themeProvider = Provider.of<ThemeProvider>(context);
+    var user = peopleProvider.currentUser;
     return MaterialApp(
       title: "Qadaa",
       theme: ThemeData(
@@ -38,15 +40,9 @@ class MainScreen extends StatelessWidget {
                 ),
                 children: <TextSpan>[
                   TextSpan(
-                    text: peopleProvider.currentUser != ""
-                        ? capitalize(text: peopleProvider.currentUser)
-                        : "",
+                    text: user != "" ? uiName(user) : "",
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  // TextSpan(
-                  //   text: capitalize(peopleProvider.currentUser),
-                  //   style: const TextStyle(fontSize: 13, fontFamily: 'Courier'),
-                  // ),
                 ],
               ),
             ),
@@ -106,11 +102,4 @@ class MainScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-String capitalize({text}) {
-  if (text != null) {
-    return "${text[0].toUpperCase()}${text.substring(1).toLowerCase()}";
-  }
-  return "";
 }

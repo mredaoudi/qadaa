@@ -13,7 +13,7 @@ class FastProvider extends ChangeNotifier {
 
   void setup(String user) {
     var box = Hive.box('fasts');
-    _fasts = box.get('${user}_amount') ?? 0;
+    _fasts = box.get('${user}__amount') ?? 0;
   }
 
   get fasts => _fasts;
@@ -21,7 +21,7 @@ class FastProvider extends ChangeNotifier {
   void incrementOperation(int amount, String user) {
     _fasts = max(_fasts + amount, 0);
     var box = Hive.box('fasts');
-    box.put('${user}_amount', _fasts);
+    box.put('${user}__amount', _fasts);
     notifyListeners();
   }
 }

@@ -31,6 +31,7 @@ class _PrayerCounterState extends State<PrayerCounter> {
     final prayerProvider = Provider.of<PrayerProvider>(context, listen: false);
     final peopleProvider = Provider.of<PeopleProvider>(context, listen: false);
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    var user = peopleProvider.currentUser;
     return Column(
       children: [
         Padding(
@@ -59,7 +60,7 @@ class _PrayerCounterState extends State<PrayerCounter> {
                         prayerProvider.incrementOperation(
                           prayer: widget.prayer,
                           amount: -1,
-                          user: peopleProvider.currentUser,
+                          user: user,
                         );
                       });
                     }
@@ -74,7 +75,7 @@ class _PrayerCounterState extends State<PrayerCounter> {
                     prayerProvider.incrementOperation(
                       prayer: widget.prayer,
                       amount: -1,
-                      user: peopleProvider.currentUser,
+                      user: user,
                     );
                   },
                   backgroundColor: themeProvider.minus(),
@@ -108,7 +109,7 @@ class _PrayerCounterState extends State<PrayerCounter> {
                         prayerProvider.incrementOperation(
                           prayer: widget.prayer,
                           amount: 1,
-                          user: peopleProvider.currentUser,
+                          user: user,
                         );
                       });
                     }
@@ -122,7 +123,7 @@ class _PrayerCounterState extends State<PrayerCounter> {
                   onPressed: () => prayerProvider.incrementOperation(
                     prayer: widget.prayer,
                     amount: 1,
-                    user: peopleProvider.currentUser,
+                    user: user,
                   ),
                   backgroundColor: themeProvider.plus(),
                   child: const Icon(Icons.add, color: Colors.white),
