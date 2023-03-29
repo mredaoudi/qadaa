@@ -80,7 +80,7 @@ class UserFormState extends State<UserForm> {
                         Navigator.pushNamed(context, '/');
                       },
                 child: const Text(
-                  "Create user",
+                  "Add person",
                   style: TextStyle(fontSize: 20),
                 ),
               ),

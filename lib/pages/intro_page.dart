@@ -1,3 +1,4 @@
+import '../components/prayer_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -68,23 +69,6 @@ class OnBoardingPageState extends State<OnBoardingPage> {
           image: _buildImage('pray2.png'),
           decoration: pageDecoration,
         ),
-        // PageViewModel(
-        //   title: "",
-        //   bodyWidget: const Column(
-        //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //     children: [
-        //       PrayerCounter(prayer: 'Prayer', amount: 4),
-        //       PrayerCounter(prayer: 'Prayer', amount: 4),
-        //       PrayerCounter(prayer: 'Prayer', amount: 4),
-        //       PrayerCounter(prayer: 'Prayer', amount: 4),
-        //       Text(
-        //         "Increment or decrease a prayer counter by clicking on the buttons.",
-        //         style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
-        //         textAlign: TextAlign.center,
-        //       ),
-        //     ],
-        //   ),
-        // ),
       ],
       onDone: () => _onIntroEnd(context),
       //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
