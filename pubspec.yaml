@@ -3,7 +3,7 @@ description: An app to keep up with your missed prayers.
 
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
   sdk: '>=3.0.0-179.0.dev <4.0.0'
