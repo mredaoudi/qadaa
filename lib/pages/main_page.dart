@@ -21,9 +21,8 @@ class MainScreen extends StatelessWidget {
     var user = peopleProvider.currentUser;
     return MaterialApp(
       title: "Qadaa",
-      theme: ThemeData(
-        primaryColor: const Color(0xFF4E6E81),
-      ),
+      theme:
+          ThemeData(primaryColor: const Color(0xFF4E6E81), useMaterial3: false),
       home: DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -47,6 +46,13 @@ class MainScreen extends StatelessWidget {
               ),
             ),
             backgroundColor: themeProvider.appbar(),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/people');
+                  },
+                  icon: const Icon(Icons.people))
+            ],
             bottom: const TabBar(
               tabs: [
                 Tab(text: 'Prayers'),
