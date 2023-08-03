@@ -63,7 +63,10 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
     return Scaffold(
       backgroundColor: themeProvider.background(),
       appBar: AppBar(
-        title: const Icon(Icons.edit_calendar_outlined),
+        foregroundColor: themeProvider.appBarIcon(),
+        title: const Icon(
+          Icons.edit_calendar_outlined,
+        ),
         backgroundColor: themeProvider.appbar(),
         centerTitle: true,
       ),

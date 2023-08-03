@@ -62,6 +62,7 @@ class _PeopleScreenState extends State<PeopleScreen> {
     return Scaffold(
         backgroundColor: themeProvider.background(),
         appBar: AppBar(
+          foregroundColor: themeProvider.appBarIcon(),
           title: const Icon(Icons.person),
           backgroundColor: themeProvider.appbar(),
           centerTitle: true,

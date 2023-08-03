@@ -40,6 +40,7 @@ class _FastPeriodScreenState extends State<FastPeriodScreen> {
     return Scaffold(
       backgroundColor: themeProvider.background(),
       appBar: AppBar(
+        foregroundColor: themeProvider.appBarIcon(),
         title: const Icon(Icons.edit_calendar_outlined),
         backgroundColor: themeProvider.appbar(),
         centerTitle: true,
