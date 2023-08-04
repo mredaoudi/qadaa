@@ -21,8 +21,10 @@ class MainScreen extends StatelessWidget {
     var user = peopleProvider.currentUser;
     return MaterialApp(
       title: "Qadaa",
-      theme:
-          ThemeData(primaryColor: const Color(0xFF4E6E81), useMaterial3: false),
+      theme: ThemeData(
+        primaryColor: const Color(0xFF4E6E81),
+        useMaterial3: false,
+      ),
       home: peopleProvider.getPeople().isEmpty
           ? Scaffold(
               resizeToAvoidBottomInset: false,

@@ -6,7 +6,7 @@ import 'package:qadaa/providers/prayer_provider.dart';
 import '../providers/theme_provider.dart';
 import '../utils.dart';
 import '../providers/people_provider.dart';
-import 'package:confirm_dialog/confirm_dialog.dart';
+import '../components/confirm_dialog.dart';
 
 class PeopleScreen extends StatefulWidget {
   const PeopleScreen({super.key});
@@ -125,8 +125,6 @@ class _PeopleScreenState extends State<PeopleScreen> {
                                 onPressed: () {
                                   if (person != peopleProvider.currentUser) {
                                     peopleProvider.setCurrentUser(person);
-                                    prayerProvider.setup(person);
-                                    fastProvider.setup(person);
                                   }
                                 },
                               ),
@@ -200,10 +198,10 @@ class _PeopleScreenState extends State<PeopleScreen> {
                           var modifiedName = serverName(name);
                           if (!existingPeople.contains(modifiedName)) {
                             peopleProvider.createPerson(name: modifiedName);
+                            prayerProvider.setup(modifiedName);
+                            fastProvider.setup(modifiedName);
                             if (peopleProvider.getPeople().length == 1) {
                               peopleProvider.setCurrentUser(modifiedName);
-                              prayerProvider.setup(modifiedName);
-                              fastProvider.setup(modifiedName);
                             }
                             Navigator.of(context, rootNavigator: true)
                                 .pop('dialog');

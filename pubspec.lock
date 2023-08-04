@@ -73,14 +73,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
-  confirm_dialog:
-    dependency: "direct main"
-    description:
-      name: confirm_dialog
-      sha256: b6098f3b487901611de5302f06960fd0da738b245cd15b04e84bedeb7829ed58
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.2"
   convert:
     dependency: transitive
     description:
