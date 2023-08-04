@@ -30,6 +30,7 @@ class MainScreen extends StatelessWidget {
           drawer: const NavDrawer(),
           backgroundColor: themeProvider.background(),
           appBar: AppBar(
+            elevation: 0,
             centerTitle: true,
             title: RichText(
               textAlign: TextAlign.center,
@@ -53,8 +54,10 @@ class MainScreen extends StatelessWidget {
                   },
                   icon: const Icon(Icons.people))
             ],
-            bottom: const TabBar(
-              tabs: [
+            bottom: TabBar(
+              indicatorColor: themeProvider.appBarIcon(),
+              // indicatorSize: TabBarIndicatorSize.label,
+              tabs: const [
                 Tab(text: 'Prayers'),
                 Tab(text: "Fasts"),
               ],

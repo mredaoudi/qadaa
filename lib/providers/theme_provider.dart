@@ -13,6 +13,10 @@ class ThemeProvider extends ChangeNotifier {
     _light = box.get('currentTheme') ?? true;
   }
 
+  bool isLight() {
+    return _light;
+  }
+
   void changeTheme() {
     var box = Hive.box('theme');
     _light = !_light;

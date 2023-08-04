@@ -33,7 +33,7 @@ class NavDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.wb_sunny, color: themeProvider.icon()),
-            title: Text('Dark mode',
+            title: Text(themeProvider.isLight() ? 'Dark mode' : 'Light mode',
                 style: TextStyle(color: themeProvider.text())),
             onTap: () async {
               themeProvider.changeTheme();
@@ -64,7 +64,7 @@ class NavDrawer extends StatelessWidget {
                         TextSpan(
                             style: textStyle,
                             text:
-                                "Qadaa is an application made to help Muslims fulfill"
+                                "Qadaa is an application made to help Muslims fulfill "
                                 'their duties that they missed, like prayers and fasts. '),
                       ],
                     ),

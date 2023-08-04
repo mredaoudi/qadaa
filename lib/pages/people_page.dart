@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 import '../providers/theme_provider.dart';
-import '../providers/prayer_provider.dart';
+import '../utils.dart';
 import '../providers/people_provider.dart';
-
-const List<Widget> prayers = <Widget>[
-  Text('Fajr'),
-  Text('Zuhr'),
-  Text('Asr'),
-  Text('Maghrib'),
-  Text('Isha')
-];
 
 class PeopleScreen extends StatefulWidget {
   const PeopleScreen({super.key});
@@ -20,44 +13,9 @@ class PeopleScreen extends StatefulWidget {
 }
 
 class _PeopleScreenState extends State<PeopleScreen> {
-  var _amount = 0;
-
-  var periods = {
-    'years': {"amount": 0, "increment": 365, "label": "Years"},
-    'months': {"amount": 0, "increment": 30, "label": "Months"},
-    'weeks': {"amount": 0, "increment": 7, "label": "Weeks"},
-    'days': {"amount": 0, "increment": 1, "label": "Days"}
-  };
-
-  final List<bool> _selectedPrayers = <bool>[false, false, false, false, false];
-
-  void incrementPeriod(String period, int amount) {
-    setState(() {
-      int am = (periods[period]!["amount"]! as int) + amount;
-      periods[period]!["amount"] = am;
-      int result = 0;
-      for (var val in periods.values) {
-        result = result + (val['increment']! as int) * (val['amount']! as int);
-      }
-      _amount = result;
-    });
-  }
-
-  bool checkForm() {
-    var praySelected = false;
-    for (var pray in _selectedPrayers) {
-      if (pray == true) {
-        praySelected = true;
-        break;
-      }
-    }
-    return _amount != 0 && praySelected;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final prayerProvider = Provider.of<PrayerProvider>(context);
-    final peopleProvider = Provider.of<PeopleProvider>(context, listen: false);
+    final peopleProvider = Provider.of<PeopleProvider>(context, listen: true);
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
         backgroundColor: themeProvider.background(),
@@ -69,23 +27,95 @@ class _PeopleScreenState extends State<PeopleScreen> {
         ),
         body: ListView(
           padding: const EdgeInsets.all(8),
-          children: <Widget>[
-            Container(
-              height: 50,
-              color: Colors.amber[600],
-              child: const Center(child: Text('Entry A')),
-            ),
-            Container(
-              height: 50,
-              color: Colors.amber[500],
-              child: const Center(child: Text('Entry B')),
-            ),
-            Container(
-              height: 50,
-              color: Colors.amber[100],
-              child: const Center(child: Text('Entry C')),
-            ),
+          children: [
+            for (String person in peopleProvider.getPeople())
+              ListTile(
+                title: Text(
+                  person,
+                ),
+                titleTextStyle:
+                    TextStyle(color: themeProvider.text(), fontSize: 18),
+                subtitle: const Text("17 prayers - 6 fasts"),
+                trailing: peopleProvider.currentUser == person
+                    ? const Icon(Icons.check_circle)
+                    : null,
+                leading: const Icon(Icons.person),
+              )
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (_) {
+                List existingPeople = peopleProvider.getPeople();
+                String personError = "";
+                String name = "";
+                return StatefulBuilder(builder: (context, setState) {
+                  return AlertDialog(
+                    title: const Text('Add a new person'),
+                    content: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          if (personError != "")
+                            Text(
+                              personError,
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          TextFormField(
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp("[a-zA-Z]")),
+                            ],
+                            onChanged: (value) {
+                              setState(() {
+                                name = value;
+                                if (existingPeople.contains(serverName(name))) {
+                                  setState(() {
+                                    personError =
+                                        "This username exists already";
+                                  });
+                                } else {
+                                  setState(() {
+                                    personError = "";
+                                  });
+                                }
+                              });
+                            },
+                            decoration: const InputDecoration(hintText: 'Name'),
+                          ),
+                        ],
+                      ),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.of(context, rootNavigator: true)
+                                .pop('dialog'),
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          if (name.isNotEmpty) {
+                            var modifiedName = serverName(name);
+                            if (!existingPeople.contains(modifiedName)) {
+                              peopleProvider.createPerson(name: modifiedName);
+                              Navigator.of(context, rootNavigator: true)
+                                  .pop('dialog');
+                            }
+                          }
+                        },
+                        child: const Text('Create'),
+                      ),
+                    ],
+                  );
+                });
+              },
+            );
+          },
+          backgroundColor: themeProvider.minus(),
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.add),
         ));
   }
 }

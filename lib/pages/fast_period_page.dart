@@ -87,6 +87,11 @@ class _FastPeriodScreenState extends State<FastPeriodScreen> {
           const SizedBox(height: 20),
           ElevatedButton(
             style: ButtonStyle(
+              shape: MaterialStateProperty.resolveWith(
+                (states) => RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
               backgroundColor:
                   MaterialStateProperty.resolveWith<Color>((states) {
                 if (states.contains(MaterialState.disabled)) {
@@ -94,6 +99,10 @@ class _FastPeriodScreenState extends State<FastPeriodScreen> {
                       255, 125, 125, 125); // Disabled color
                 }
                 return const Color(0xFF4E6E81); // Regular color
+              }),
+              foregroundColor:
+                  MaterialStateProperty.resolveWith<Color>((states) {
+                return Colors.white; // Regular color
               }),
               minimumSize: const MaterialStatePropertyAll(Size(50, 50)),
             ),

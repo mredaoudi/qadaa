@@ -112,7 +112,8 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
               )
               .toList(),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40),
+            padding: EdgeInsets.symmetric(
+                vertical: MediaQuery.of(context).size.height / 50),
             child: ToggleButtons(
               direction: Axis.horizontal,
               onPressed: (int index) {
@@ -127,16 +128,20 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
               selectedColor: Colors.white,
               fillColor: const Color(0xFF4E6E81),
               color: themeProvider.text(),
-              constraints: const BoxConstraints(
-                minHeight: 40.0,
-                minWidth: 80.0,
-              ),
+              constraints: BoxConstraints(
+                  minWidth: MediaQuery.of(context).size.width / 6,
+                  minHeight: MediaQuery.of(context).size.height / 20),
               isSelected: _selectedPrayers,
               children: prayers,
             ),
           ),
           ElevatedButton(
             style: ButtonStyle(
+              shape: MaterialStateProperty.resolveWith(
+                (states) => RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
               backgroundColor:
                   MaterialStateProperty.resolveWith<Color>((states) {
                 if (states.contains(MaterialState.disabled)) {
@@ -146,6 +151,10 @@ class _PrayerPeriodScreenState extends State<PrayerPeriodScreen> {
                 return const Color(0xFF4E6E81); // Regular color
               }),
               minimumSize: const MaterialStatePropertyAll(Size(50, 50)),
+              foregroundColor:
+                  MaterialStateProperty.resolveWith<Color>((states) {
+                return Colors.white; // Regular color
+              }),
             ),
             onPressed: !checkForm()
                 ? null
