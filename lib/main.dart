@@ -22,11 +22,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<PrayerProvider>(
-          create: (_) => currentUser == ''
-              ? PrayerProvider()
-              : PrayerProvider(user: currentUser),
-        ),
+        ChangeNotifierProvider<PrayerProvider>(create: (_) => PrayerProvider()),
         ChangeNotifierProvider<FastProvider>(create: (_) => FastProvider()),
         ChangeNotifierProvider<PeopleProvider>(create: (_) => PeopleProvider()),
         ChangeNotifierProvider<ThemeProvider>(create: (_) => ThemeProvider()),

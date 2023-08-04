@@ -5,28 +5,35 @@ import 'package:hive/hive.dart';
 class FastProvider extends ChangeNotifier {
   int _fasts = 0;
 
-  FastProvider({user}) {
-    if (user != null) {
-      setup(user);
-    }
-  }
+  FastProvider();
 
   void setup(String user) {
     var box = Hive.box('fasts');
-    _fasts = box.get('${user}__amount') ?? 0;
+    box.put('${user}__amount', 0);
   }
 
-  get fasts => _fasts;
+  int fasts({required String user}) {
+    var box = Hive.box('fasts');
+    return box.get('${user}__amount') ?? 0;
+  }
 
   void incrementOperation(int amount, String user) {
-    _fasts = max(_fasts + amount, 0);
     var box = Hive.box('fasts');
+    var initValue = box.get('${user}__amount') ?? 0;
+    _fasts = max(initValue + amount, 0);
     box.put('${user}__amount', _fasts);
     notifyListeners();
   }
 
-  num amountFastsUser({required String user}) {
+  void deleteUser({required String user}) {
     var box = Hive.box('fasts');
-    return box.get('${user}__amount') ?? 0;
+    box.delete('${user}__amount');
+    notifyListeners();
+  }
+
+  void reset({required String user}) {
+    var box = Hive.box('fasts');
+    box.put('${user}__amount', 0);
+    notifyListeners();
   }
 }

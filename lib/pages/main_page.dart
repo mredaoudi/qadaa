@@ -63,7 +63,7 @@ class MainScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, '/people');
                       },
-                      child: const Icon(Icons.people),
+                      child: const Icon(Icons.person_add),
                     ),
                   ],
                 ),
@@ -114,7 +114,9 @@ class MainScreen extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        ...prayerProvider.prayers.entries
+                        ...prayerProvider
+                            .prayers(user: user)
+                            .entries
                             .map((entry) => PrayerCounter(
                                   prayer: entry.key,
                                   amount: entry.value,
@@ -133,7 +135,7 @@ class MainScreen extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        FastCounter(amount: fastProvider.fasts),
+                        FastCounter(amount: fastProvider.fasts(user: user)),
                         SizedBox(
                           height: 100.0,
                           width: 100.0,

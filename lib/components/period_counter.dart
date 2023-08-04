@@ -3,11 +3,11 @@ import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
 
 class PeriodCounter extends StatelessWidget {
-  Map info;
-  String period;
-  Function operation;
+  final Map info;
+  final String period;
+  final Function operation;
 
-  PeriodCounter(
+  const PeriodCounter(
       {super.key,
       required this.period,
       required this.info,

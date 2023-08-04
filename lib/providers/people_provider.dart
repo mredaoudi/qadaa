@@ -35,6 +35,21 @@ class PeopleProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deletePerson({name}) {
+    var box = Hive.box('people');
+    var userList = box.get('users');
+    userList.removeWhere((item) => item == name);
+    box.put('users', userList);
+    if (_currentUser == name) {
+      if (userList.length > 0) {
+        _currentUser = userList[0];
+      } else {
+        _currentUser = '';
+      }
+    }
+    notifyListeners();
+  }
+
   List getPeople() {
     var box = Hive.box('people');
     var userList = box.get('users') ?? [];

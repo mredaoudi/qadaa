@@ -42,6 +42,10 @@ class ThemeProvider extends ChangeNotifier {
         : const Color.fromARGB(255, 255, 253, 250).withOpacity(0.87);
   }
 
+  Color button() {
+    return const Color(0xFF4E6E81);
+  }
+
   Color appBarIcon() {
     return const Color.fromARGB(255, 255, 253, 250).withOpacity(0.87);
   }
