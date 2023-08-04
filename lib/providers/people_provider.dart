@@ -20,9 +20,9 @@ class PeopleProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void createPerson({name, firstTime = false}) {
+  void createPerson({name}) {
     var box = Hive.box('people');
-    if (firstTime) {
+    if (getPeople().isEmpty) {
       var initialList = [name];
       box.put('users', initialList);
       box.put('currentUser', name);
@@ -37,7 +37,7 @@ class PeopleProvider extends ChangeNotifier {
 
   List getPeople() {
     var box = Hive.box('people');
-    var userList = box.get('users');
+    var userList = box.get('users') ?? [];
     return userList;
   }
 

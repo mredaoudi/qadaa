@@ -4,7 +4,6 @@ import 'pages/main_page.dart';
 import 'pages/prayer_period_page.dart';
 import 'pages/fast_period_page.dart';
 import 'pages/intro_page.dart';
-import 'pages/user_form.dart';
 import 'pages/people_page.dart';
 import 'providers/prayer_provider.dart';
 import 'providers/fast_provider.dart';
@@ -34,11 +33,10 @@ void main() async {
       ],
       child: MaterialApp(
         title: 'Qadaa',
-        initialRoute: '/intro',
+        initialRoute: currentUser == '' ? '/intro' : '/',
         routes: {
           '/': (context) => const MainScreen(),
           '/intro': (context) => const OnBoardingPage(),
-          '/setup_user': (context) => const UserForm(),
           '/people': (context) => const PeopleScreen(),
           '/period/prayers': (context) => const PrayerPeriodScreen(),
           '/period/fasts': (context) => const FastPeriodScreen(),

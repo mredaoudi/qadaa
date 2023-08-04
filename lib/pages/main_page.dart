@@ -23,92 +23,138 @@ class MainScreen extends StatelessWidget {
       title: "Qadaa",
       theme:
           ThemeData(primaryColor: const Color(0xFF4E6E81), useMaterial3: false),
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          drawer: const NavDrawer(),
-          backgroundColor: themeProvider.background(),
-          appBar: AppBar(
-            elevation: 0,
-            centerTitle: true,
-            title: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                style: const TextStyle(
-                  fontSize: 20.0,
+      home: peopleProvider.getPeople().isEmpty
+          ? Scaffold(
+              resizeToAvoidBottomInset: false,
+              drawer: const NavDrawer(),
+              backgroundColor: themeProvider.background(),
+              appBar: AppBar(
+                elevation: 0,
+                centerTitle: true,
+                title: RichText(
+                  textAlign: TextAlign.center,
+                  text: const TextSpan(
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: "Qadaa",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: user != "" ? uiName(user) : "",
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
+                backgroundColor: themeProvider.appbar(),
               ),
-            ),
-            backgroundColor: themeProvider.appbar(),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/people');
-                  },
-                  icon: const Icon(Icons.people))
-            ],
-            bottom: TabBar(
-              indicatorColor: themeProvider.appBarIcon(),
-              // indicatorSize: TabBarIndicatorSize.label,
-              tabs: const [
-                Tab(text: 'Prayers'),
-                Tab(text: "Fasts"),
-              ],
-            ),
-          ),
-          body: TabBarView(
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  ...prayerProvider.prayers.entries
-                      .map((entry) => PrayerCounter(
-                            prayer: entry.key,
-                            amount: entry.value,
-                          ))
-                      .toList(),
-                  FloatingActionButton(
-                    heroTag: 'calendar-prayer',
-                    backgroundColor: const Color(0xFF4E6E81),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/period/prayers');
-                    },
-                    child: const Icon(Icons.edit_calendar_outlined),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  FastCounter(amount: fastProvider.fasts),
-                  SizedBox(
-                    height: 100.0,
-                    width: 100.0,
-                    child: FloatingActionButton(
-                      heroTag: 'calendar-fast',
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Add a person",
+                      style:
+                          TextStyle(color: themeProvider.text(), fontSize: 32),
+                    ),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 20)),
+                    FloatingActionButton(
+                      heroTag: 'calendar-prayer',
                       backgroundColor: const Color(0xFF4E6E81),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/period/fasts');
+                        Navigator.pushNamed(context, '/people');
                       },
-                      child: const Icon(
-                        Icons.edit_calendar,
-                        size: 40,
+                      child: const Icon(Icons.people),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          : DefaultTabController(
+              length: 2,
+              child: Scaffold(
+                resizeToAvoidBottomInset: false,
+                drawer: const NavDrawer(),
+                backgroundColor: themeProvider.background(),
+                appBar: AppBar(
+                  elevation: 0,
+                  centerTitle: true,
+                  title: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      style: const TextStyle(
+                        fontSize: 20.0,
                       ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: user != "" ? uiName(user) : "",
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                  backgroundColor: themeProvider.appbar(),
+                  actions: [
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/people');
+                        },
+                        icon: const Icon(Icons.people))
+                  ],
+                  bottom: TabBar(
+                    indicatorColor: themeProvider.appBarIcon(),
+                    // indicatorSize: TabBarIndicatorSize.label,
+                    tabs: const [
+                      Tab(text: 'Prayers'),
+                      Tab(text: "Fasts"),
+                    ],
+                  ),
+                ),
+                body: TabBarView(
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        ...prayerProvider.prayers.entries
+                            .map((entry) => PrayerCounter(
+                                  prayer: entry.key,
+                                  amount: entry.value,
+                                ))
+                            .toList(),
+                        FloatingActionButton(
+                          heroTag: 'calendar-prayer',
+                          backgroundColor: const Color(0xFF4E6E81),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/period/prayers');
+                          },
+                          child: const Icon(Icons.edit_calendar_outlined),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        FastCounter(amount: fastProvider.fasts),
+                        SizedBox(
+                          height: 100.0,
+                          width: 100.0,
+                          child: FloatingActionButton(
+                            heroTag: 'calendar-fast',
+                            backgroundColor: const Color(0xFF4E6E81),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/period/fasts');
+                            },
+                            child: const Icon(
+                              Icons.edit_calendar,
+                              size: 40,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }

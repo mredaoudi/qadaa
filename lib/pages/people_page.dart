@@ -29,7 +29,7 @@ class _PeopleScreenState extends State<PeopleScreen> {
         backgroundColor: themeProvider.background(),
         appBar: AppBar(
           foregroundColor: themeProvider.appBarIcon(),
-          title: const Icon(Icons.person),
+          title: const Icon(Icons.people),
           backgroundColor: themeProvider.appbar(),
           centerTitle: true,
         ),
@@ -54,24 +54,47 @@ class _PeopleScreenState extends State<PeopleScreen> {
                   ),
                 ),
                 subtitleTextStyle: TextStyle(color: themeProvider.text()),
-                trailing: peopleProvider.currentUser == person
-                    ? Icon(
-                        Icons.check_circle,
-                        color: themeProvider.text(),
-                      )
-                    : null,
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const IconButton(
+                      onPressed: null,
+                      icon: Icon(Icons.refresh),
+                    ),
+                    IconButton(
+                      onPressed: null,
+                      icon: Icon(
+                        Icons.remove_circle_outline,
+                        color: themeProvider.plus(),
+                      ),
+                    ),
+                    peopleProvider.currentUser == person
+                        ? IconButton(
+                            icon: Icon(
+                              Icons.circle,
+                              color: themeProvider.icon(),
+                            ),
+                            onPressed: null,
+                          )
+                        : IconButton(
+                            icon: Icon(
+                              Icons.circle_outlined,
+                              color: themeProvider.text(),
+                            ),
+                            onPressed: () {
+                              if (person != peopleProvider.currentUser) {
+                                peopleProvider.setCurrentUser(person);
+                                prayerProvider.setup(person);
+                                fastProvider.setup(person);
+                              }
+                            },
+                          ),
+                  ],
+                ),
                 leading: Icon(
                   Icons.person,
                   color: themeProvider.text(),
                 ),
-                onTap: () {
-                  if (person != peopleProvider.currentUser) {
-                    peopleProvider.setCurrentUser(person);
-                    prayerProvider.setup(person);
-                    fastProvider.setup(person);
-                  }
-                },
-                onLongPress: () {},
               )
           ],
         ),
