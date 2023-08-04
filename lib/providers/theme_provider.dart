@@ -60,6 +60,10 @@ class ThemeProvider extends ChangeNotifier {
     return const Color(0xFF4DAB8F).withOpacity(0.87);
   }
 
+  Color minusDisabled() {
+    return const Color(0xFF4DAB8F).withOpacity(0.50);
+  }
+
   Color plus() {
     return const Color.fromARGB(255, 162, 57, 57).withOpacity(0.87);
   }

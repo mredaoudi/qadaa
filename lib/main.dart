@@ -17,8 +17,9 @@ void main() async {
   await Hive.openBox('fasts');
   await Hive.openBox('people');
   await Hive.openBox('theme');
-  var box = Hive.box('people');
-  var currentUser = box.get('currentUser') ?? '';
+  await Hive.openBox('history');
+  var box = Hive.box('history');
+  var alreadyOpened = box.get('alreadyOpened') ?? false;
   runApp(
     MultiProvider(
       providers: [
@@ -29,7 +30,7 @@ void main() async {
       ],
       child: MaterialApp(
         title: 'Qadaa',
-        initialRoute: currentUser == '' ? '/intro' : '/',
+        initialRoute: alreadyOpened ? '/' : '/intro',
         routes: {
           '/': (context) => const MainScreen(),
           '/intro': (context) => const OnBoardingPage(),

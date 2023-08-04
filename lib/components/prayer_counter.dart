@@ -70,6 +70,7 @@ class _PrayerCounterState extends State<PrayerCounter> {
                   _cancelIncrease();
                 },
                 child: FloatingActionButton(
+                  elevation: widget.amount > 0 ? 3 : 0,
                   heroTag: '${widget.prayer}' 'plus',
                   onPressed: () async {
                     prayerProvider.incrementOperation(
@@ -78,7 +79,9 @@ class _PrayerCounterState extends State<PrayerCounter> {
                       user: user,
                     );
                   },
-                  backgroundColor: themeProvider.minus(),
+                  backgroundColor: widget.amount > 0
+                      ? themeProvider.minus()
+                      : themeProvider.minusDisabled(),
                   child: const Icon(
                     Icons.remove,
                     color: Colors.white,
@@ -119,6 +122,7 @@ class _PrayerCounterState extends State<PrayerCounter> {
                   _cancelIncrease();
                 },
                 child: FloatingActionButton(
+                  elevation: 3,
                   heroTag: '${widget.prayer}' 'minus',
                   onPressed: () => prayerProvider.incrementOperation(
                     prayer: widget.prayer,

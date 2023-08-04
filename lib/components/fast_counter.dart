@@ -71,11 +71,14 @@ class _FastCounterState extends State<FastCounter> {
                     _cancelIncrease();
                   },
                   child: FloatingActionButton(
+                    elevation: widget.amount > 0 ? 3 : 0,
                     heroTag: 'fast' 'plus',
                     onPressed: () async {
                       fastProvider.incrementOperation(-1, user);
                     },
-                    backgroundColor: themeProvider.minus(),
+                    backgroundColor: widget.amount > 0
+                        ? themeProvider.minus()
+                        : themeProvider.minusDisabled(),
                     child: const Icon(
                       Icons.remove,
                       color: Colors.white,
@@ -112,6 +115,7 @@ class _FastCounterState extends State<FastCounter> {
                     _cancelIncrease();
                   },
                   child: FloatingActionButton(
+                    elevation: 3,
                     heroTag: 'fast' 'minus',
                     onPressed: () => fastProvider.incrementOperation(1, user),
                     backgroundColor: themeProvider.plus(),
