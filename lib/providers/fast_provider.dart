@@ -24,4 +24,9 @@ class FastProvider extends ChangeNotifier {
     box.put('${user}__amount', _fasts);
     notifyListeners();
   }
+
+  num amountFastsUser({required String user}) {
+    var box = Hive.box('fasts');
+    return box.get('${user}__amount') ?? 0;
+  }
 }

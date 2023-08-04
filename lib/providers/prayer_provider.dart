@@ -42,4 +42,13 @@ class PrayerProvider extends ChangeNotifier {
       box.put('${user}__$pkey', 0);
     }
   }
+
+  num amountPrayersUser({required String user}) {
+    num amount = 0;
+    var box = Hive.box('prayers');
+    for (var pkey in _prayers.keys) {
+      amount += box.get('${user}__$pkey') ?? 0;
+    }
+    return amount;
+  }
 }

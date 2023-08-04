@@ -14,9 +14,9 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final prayerProvider = Provider.of<PrayerProvider>(context);
+    final prayerProvider = Provider.of<PrayerProvider>(context, listen: true);
     final fastProvider = Provider.of<FastProvider>(context);
-    final peopleProvider = Provider.of<PeopleProvider>(context);
+    final peopleProvider = Provider.of<PeopleProvider>(context, listen: true);
     final themeProvider = Provider.of<ThemeProvider>(context);
     var user = peopleProvider.currentUser;
     return MaterialApp(

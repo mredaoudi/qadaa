@@ -34,7 +34,7 @@ void main() async {
       ],
       child: MaterialApp(
         title: 'Qadaa',
-        initialRoute: currentUser == '' ? '/intro' : '/',
+        initialRoute: '/intro',
         routes: {
           '/': (context) => const MainScreen(),
           '/intro': (context) => const OnBoardingPage(),

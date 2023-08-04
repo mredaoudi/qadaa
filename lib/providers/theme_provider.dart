@@ -59,4 +59,10 @@ class ThemeProvider extends ChangeNotifier {
   Color plus() {
     return const Color.fromARGB(255, 162, 57, 57).withOpacity(0.87);
   }
+
+  Color personName() {
+    return _light
+        ? const Color.fromARGB(255, 100, 100, 100)
+        : const Color.fromARGB(255, 255, 253, 250).withOpacity(0.87);
+  }
 }

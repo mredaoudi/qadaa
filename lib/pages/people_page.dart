@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
+import 'package:qadaa/providers/fast_provider.dart';
+import 'package:qadaa/providers/prayer_provider.dart';
 import '../providers/theme_provider.dart';
 import '../utils.dart';
 import '../providers/people_provider.dart';
@@ -13,9 +15,15 @@ class PeopleScreen extends StatefulWidget {
 }
 
 class _PeopleScreenState extends State<PeopleScreen> {
+  String infoPerson(prayers, fasts) {
+    return "$prayers prayers - $fasts fasts";
+  }
+
   @override
   Widget build(BuildContext context) {
     final peopleProvider = Provider.of<PeopleProvider>(context, listen: true);
+    final prayerProvider = Provider.of<PrayerProvider>(context);
+    final fastProvider = Provider.of<FastProvider>(context);
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
         backgroundColor: themeProvider.background(),
@@ -33,13 +41,37 @@ class _PeopleScreenState extends State<PeopleScreen> {
                 title: Text(
                   person,
                 ),
-                titleTextStyle:
-                    TextStyle(color: themeProvider.text(), fontSize: 18),
-                subtitle: const Text("17 prayers - 6 fasts"),
+                titleTextStyle: TextStyle(
+                    color: themeProvider.personName(),
+                    fontSize: 18,
+                    fontWeight: peopleProvider.currentUser == person
+                        ? FontWeight.w500
+                        : null),
+                subtitle: Text(
+                  infoPerson(
+                    prayerProvider.amountPrayersUser(user: person),
+                    fastProvider.amountFastsUser(user: person),
+                  ),
+                ),
+                subtitleTextStyle: TextStyle(color: themeProvider.text()),
                 trailing: peopleProvider.currentUser == person
-                    ? const Icon(Icons.check_circle)
+                    ? Icon(
+                        Icons.check_circle,
+                        color: themeProvider.text(),
+                      )
                     : null,
-                leading: const Icon(Icons.person),
+                leading: Icon(
+                  Icons.person,
+                  color: themeProvider.text(),
+                ),
+                onTap: () {
+                  if (person != peopleProvider.currentUser) {
+                    peopleProvider.setCurrentUser(person);
+                    prayerProvider.setup(person);
+                    fastProvider.setup(person);
+                  }
+                },
+                onLongPress: () {},
               )
           ],
         ),
@@ -100,6 +132,11 @@ class _PeopleScreenState extends State<PeopleScreen> {
                             var modifiedName = serverName(name);
                             if (!existingPeople.contains(modifiedName)) {
                               peopleProvider.createPerson(name: modifiedName);
+                              if (peopleProvider.getPeople().length == 1) {
+                                peopleProvider.setCurrentUser(modifiedName);
+                                prayerProvider.setup(modifiedName);
+                                fastProvider.setup(modifiedName);
+                              }
                               Navigator.of(context, rootNavigator: true)
                                   .pop('dialog');
                             }
