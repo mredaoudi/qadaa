@@ -70,14 +70,22 @@ class _PeopleScreenState extends State<PeopleScreen> {
                       children: [
                         IconButton(
                           onPressed: () async {
-                            if (await confirm(
-                              context,
-                              title: const Text('Reset'),
-                              content:
-                                  Text('Would you like to reset for $person?'),
-                              textOK: const Text('Yes'),
-                              textCancel: const Text('No'),
-                            )) {
+                            if (await confirm(context,
+                                title: Text('Reset',
+                                    style: TextStyle(
+                                      color: themeProvider.personName(),
+                                    )),
+                                content: Text(
+                                  'Would you like to reset for $person?',
+                                  style: TextStyle(
+                                    color: themeProvider.personName(),
+                                  ),
+                                ),
+                                textOK: const Text('Yes'),
+                                textCancel: const Text('No'),
+                                colorOK: themeProvider.icon(),
+                                colorCancel: themeProvider.personName(),
+                                backgroundColor: themeProvider.background())) {
                               prayerProvider.reset(user: person);
                               fastProvider.reset(user: person);
                             }
@@ -90,14 +98,22 @@ class _PeopleScreenState extends State<PeopleScreen> {
                         ),
                         IconButton(
                           onPressed: () async {
-                            if (await confirm(
-                              context,
-                              title: const Text('Delete'),
-                              content:
-                                  Text('Would you like to delete $person?'),
-                              textOK: const Text('Yes'),
-                              textCancel: const Text('No'),
-                            )) {
+                            if (await confirm(context,
+                                title: Text('Delete',
+                                    style: TextStyle(
+                                      color: themeProvider.personName(),
+                                    )),
+                                content: Text(
+                                  'Would you like to delete $person?',
+                                  style: TextStyle(
+                                    color: themeProvider.personName(),
+                                  ),
+                                ),
+                                textOK: const Text('Yes'),
+                                textCancel: const Text('No'),
+                                colorOK: themeProvider.icon(),
+                                colorCancel: themeProvider.personName(),
+                                backgroundColor: themeProvider.background())) {
                               peopleProvider.deletePerson(name: person);
                               prayerProvider.deleteUser(user: person);
                               fastProvider.deleteUser(user: person);
@@ -152,7 +168,10 @@ class _PeopleScreenState extends State<PeopleScreen> {
               String name = "";
               return StatefulBuilder(builder: (context, setState) {
                 return AlertDialog(
-                  title: const Text('Add a new person'),
+                  surfaceTintColor: Colors.white,
+                  backgroundColor: themeProvider.background(),
+                  title: Text('Add a new person',
+                      style: TextStyle(color: themeProvider.personName())),
                   content: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -162,6 +181,7 @@ class _PeopleScreenState extends State<PeopleScreen> {
                             style: const TextStyle(color: Colors.red),
                           ),
                         TextFormField(
+                          style: TextStyle(color: themeProvider.personName()),
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(
                                 RegExp("[a-zA-Z]")),
@@ -180,7 +200,19 @@ class _PeopleScreenState extends State<PeopleScreen> {
                               }
                             });
                           },
-                          decoration: const InputDecoration(hintText: 'Name'),
+                          cursorColor: themeProvider.icon(),
+                          decoration: InputDecoration(
+                            hintText: "Name",
+                            hintStyle: TextStyle(color: themeProvider.text()),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: themeProvider.icon()),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: themeProvider.icon(), width: 2),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -190,6 +222,11 @@ class _PeopleScreenState extends State<PeopleScreen> {
                       onPressed: () =>
                           Navigator.of(context, rootNavigator: true)
                               .pop('dialog'),
+                      style: ButtonStyle(
+                        foregroundColor: MaterialStatePropertyAll(
+                          themeProvider.personName(),
+                        ),
+                      ),
                       child: const Text('Cancel'),
                     ),
                     TextButton(
@@ -208,6 +245,11 @@ class _PeopleScreenState extends State<PeopleScreen> {
                           }
                         }
                       },
+                      style: ButtonStyle(
+                        foregroundColor: MaterialStatePropertyAll(
+                          themeProvider.icon(),
+                        ),
+                      ),
                       child: const Text('Create'),
                     ),
                   ],
