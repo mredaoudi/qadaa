@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../providers/theme_provider.dart';
 
 /// The `title` argument is used to title of alert dialog.
 /// The `content` argument is used to content of alert dialog.
